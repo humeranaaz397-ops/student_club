@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Question & answers</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+/* ================= TOP NAV ================= */
+.top-nav{
+    background:#2c2a99;
+    color:white;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo i{ cursor:pointer; }
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-size:14px;
+}
+
+/* ================= LAYOUT ================= */
+.layout{
+    display:grid;
+    grid-template-columns:0px 1fr;
+    transition:grid-template-columns 0.35s ease;
+}
+
+/* WHEN SIDEBAR OPEN */
+.layout.show{
+    grid-template-columns:220px 1fr;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    background:lightgrey;
+    min-height:calc(100vh - 60px);
+    border-right:1px solid #ddd;
+    overflow:hidden;
+    transition:0.35s ease;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding-top:10px;
+}
+
+.sidebar li{
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.sidebar li:hover{
+    background:#e5efff;
+    color:#2563eb;
+}
+
+.sidebar i{
+    min-width:22px;
+}
+
+/* ACTIVE ITEM */
+.sidebar li.active{
+    background:#e5efff;
+    color:#2563eb;
+    border-left:4px solid #2563eb;
+}
+/* ================= FOOTER ================= */
+
+        .foot{
+     background-color: #2c2a99;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 16px;
+        }
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .layout.show{
+        grid-template-columns:60px 1fr;
+    }
+
+    .sidebar span{
+        display:none;
+    }   }
+
+
+a{
+    text-decoration:none;
+    color:black;
+}
+
+
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* PAGE HEADER */
+.page-header {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ask-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+.ask-btn:hover {
+    background-color:  #2c2a99;
+}
+
+/* QUESTION CARD */
+.question-card {
+    display: flex;
+    justify-content: space-between; /* space between content and side icons */
+    background-color: #f0f4ff;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    margin: 0 auto 20px auto;
+    transition: all 0.3s ease;
+}
+
+/* REVIEW STACK ON RIGHT */
+.review {
+    display: flex;  
+    flex-direction: column; /* stack vertically */
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+}
+
+.review span {
+    cursor: pointer;
+}
+
+/* QUESTION CONTENT */
+.question-content {
+    flex: 1;
+}
+
+.tags {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.tag {
+    background-color: rgba(17, 226, 254, 0.47);
+    padding: 5px 10px;
+    border-radius: 16px;
+    font-weight: bold;
+}
+
+.actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.actions button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.actions button:hover {
+    background-color: #1e40af;
+}
+
+.comment-box {
+    margin-top: 15px;
+    display: none;
+}
+
+.comment-box textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.comment-box button {
+    margin-top: 8px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.comment-box button:hover {
+    background-color: #1e40af;
+}
+
+/* MODAL */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #555;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+#cancelBtn {
+    background-color: #ccc;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f4ff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.hero-text {
+    max-width: 60%;
+}
+.hero-text h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}   
+.hero-sub {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555;
+}   
+.hero-actions {
+    display: flex;
+    gap: 10px;
+}
+.hero-actions input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+.hero-actions .ask-btn.small {
+    padding: 10px 16px;
+    font-size: 14px;
+}
+.hero-image img {
+    max-width: 200px;
+    border-radius: 10px;
+}
+
+.active{
+  background-color: #2c2a99;
+  color: whitesmoke;
+}
+        /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  /* TOP NAV */
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  /* SIDEBAR */
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  /* MAIN CONTENT */
+  .main-content {
+    padding: 12px;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions input {
+    width: 100%;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* PAGE HEADER */
+  .page-header {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .review {
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20px;
+    font-size: 16px;
+  }
+
+  /* TAGS */
+  .tags {
+    flex-wrap: wrap;
+  }
+
+  /* MODAL */
+  .modal-content {
+    padding: 20px;
+  }
+
+  /* FOOTER */
+  .foot {
+    font-size: 14px;
+    padding: 14px;
+  }
+}
+.question-card[data-role="my-question"],
+.question-card[data-role="my-answer"] {
+  display: none;
+}
+.qa-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  margin: 20px auto;
+  background: #f9f9f9;
+}
+
+.question {
+  margin: 0;
+  font-size: 20px;
+}
+
+.question-desc {
+  color: #555;
+}
+
+.tag {
+  display: inline-block;
+  background: #4dd0e1;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.answer-box {
+  margin-top: 15px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 5px solid #1976d2;
+}
+
+.answer-title {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.code {
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 6px;
+  font-family: monospace;
+}
+
+.answer-footer {
+  margin-top: 10px;
+  color: #ff9800;
+  font-weight: bold;
+}
+.status {
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.approved {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border-left: 6px solid #2e7d32;
+}
+
+.rejected {
+  background: #ffebee;
+  color: #c62828;
+  border-left: 6px solid #c62828;
+}
+
+.reason {
+  font-weight: normal;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.filter-active {
+  background-color: #2c2a99;
+  color: white;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= TOP NAV ================= -->
+<header class="top-nav">
+    <div class="logo">
+        <i class="fa-solid fa-bars" onclick="side()"></i>
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Student Club</span>
+    </div>
+
+    <div class="nav-actions">
+        <a href="notification(s).html" style="color:white">
+            <i class="fa-regular fa-bell"></i>
+        </a>
+
+        <a href="studentprofile.html" style="color:white">
+            <i class="fa-solid fa-user"></i>
+            <span>Sudharshan</span>
+        </a>
+
+        <!-- LOGOUT ICON  -->
+                  <i class="fa-solid fa-right-from-bracket" onclick="logout()" style="cursor:pointer;"></i>
+    </div>
+</header>
+
+<div class="layout" id="layout">
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar">
+    <ul>
+        
+        <li ><a href="studentdashboard.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+        <li class="active"><a href="q&a(s).html"><i class="fa-solid fa-clipboard-question"></i><span>Q&A</span></a></li>
+        <li><a href="studymaterial(s).html"><i class="fa-solid fa-file-lines"></i><span>Study Materials</span></a></li>
+        <li><a href="video(s).html"><i class="fa-solid fa-video"></i><span>Video Learning</span></a></li>
+        <li><a href="liveclasses(s).html"><i class="fa-brands fa-youtube"></i><span>Live Classes</span></a></li>
+        <li><a href="course.html"><i class="fa-solid fa-book-open"></i><span>Courses</span></a></li>
+        <li><a href="findpeople(s).html"><i class="fa-solid fa-users"></i><span>Find People</span></a></li>
+        <li><a href="chat(s).html"><i class="fa-solid fa-comment-dots"></i><span>Chat</span></a></li>
+        <li><a href="learningprogress(s).html"><i class="fa-solid fa-arrow-trend-up"></i><span>Progress</span></a></li>
+        
+
+    </ul>
+</aside>
+
+ <div class="main-content">
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Stay curious — Ask, Learn, Grow! ✨</h1>
+        <p class="hero-sub">Connect with peers, get quick answers, and boost your skills every day.</p>
+        <div class="hero-actions">
+          <input id="searchInput" type="text" placeholder="Search questions, tags or topics..." />
+          <button id="searchBtn" class="ask-btn small">Search</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://i.postimg.cc/cJ9k5yst/IMG-20260114-WA0066.jpg" alt="Students studying together">
+      </div>
+    </div>
+    <div class="page-header">
+      <div>
+        <h2>Q&A Community</h2>
+        <p>Ask Question, Share Knowledge</p>
+      </div>
+      </div>
+       <div class="page-header"><button class="ask-btn filter-btn" onclick="setActive(this); showAll()">All Questions</button>
+<button class="ask-btn filter-btn" onclick="setActive(this); showMyQuestions()">My Questions</button>
+<button class="ask-btn filter-btn" onclick="setActive(this); showMyAnswers()">My Answers</button>
+      <button class="ask-btn" id="openModal">Ask Question</button>
+    </div>
+
+    <!-- QUESTIONS --><div class="question-card" data-role="community">
+
+      <div class="question-content">
+        <b>How do I center a div in CSS?</b>
+        <p>I've been trying to center a div both horizontally and vertically.</p>
+        <div class="tags">
+          <span class="tag">CSS</span>
+          <span class="tag">Web Development</span>
+        </div>
+        <div class="actions">
+          <button onclick="toggleAnswer(this)">Give Answer</button>
+        </div>
+        <div class="comment-box">
+          <textarea placeholder="Write your answer..."></textarea>
+          <button onclick="post()">Post Answer</button>
+        </div>
+      </div>
+      <div class="review">
+        <span onclick="like(this)">👍 <b>45</b></span>
+        <span>💬 12</span>
+      </div>
+    </div>
+
+    <div class="question-card" data-role="community">
+
+      <div class="question-content">
+        <b>How do we add fractions?</b>
+        <p>First, make sure the denominators are the same. Then add the numerators and keep the denominator the same.</p>
+        <div class="tags">
+          <span class="tag">Math</span>
+          <span class="tag">Fractions</span>
+        </div>
+        <div class="actions">
+          <button onclick="toggleAnswer(this)">Give Answer</button>
+        </div>
+        <div class="comment-box">
+          <textarea placeholder="Write your answer..."></textarea>
+          <button onclick="post()">Post Answer</button>
+        </div>
+      </div>
+      <div class="review">
+        <span onclick="like(this)">👍 <b>45</b></span>
+        <span>💬 12</span>
+      </div>
+    </div>
+    <div class="question-card" data-role="community">
+
+      <div class="question-content">
+        <b>What is Elevated pitch?</b>
+        <p>Elevated pitch is when your voice sounds higher than its normal tone.</p>
+        <div class="tags">
+          <span class="tag">English</span>
+          <span class="tag">Voice</span>
+        </div>
+        <div class="actions">
+          <button onclick="toggleAnswer(this)">Give Answer</button>
+        </div>
+        <div class="comment-box">
+          <textarea placeholder="Write your answer..."></textarea>
+          <button onclick="post()">Post Answer</button>
+        </div>
+      </div>
+      <div class="review">
+        <span onclick="like(this)">👍 <b>35</b></span>
+        <span>💬 12</span>
+      </div>
+    </div>
+    <!---My questions-->
+<div class="question-card" data-role="my-question">
+<div class="question-contener">
+  <h3 class="question">
+    How do I center a div in CSS?
+  </h3>
+
+  <p class="question-desc">
+    I want horizontal and vertical centering.
+  </p>
+
+  <span class="tag">CSS</span>
+
+  <!-- Answer Section -->
+  <div class="answer-box">
+    <p class="answer-title">Answer by <strong>Sir Charan</strong>:</p>
+
+    <pre class="code">
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+    </pre>
+
+    <div class="answer-footer">
+      👍 <span>10</span>
+    </div>
+  </div>
+  </div>
+  </div>
+<div class="question-card" data-role="my-question">
+<div class="question-contener">
+  <h3 class="question">
+    What is Elevated pitch?
+  </h3>
+
+  <p class="question-desc">
+    I want defination.
+  </p>
+
+  <span class="tag">English</span>
+
+  <!-- Answer Section -->
+  <div class="answer-box">
+    <p class="answer-title">Answer by <strong>Sir Charan</strong>:</p>
+
+    <pre class="code">
+      
+Elevated pitch is when a person speaks in a 
+higher-than-normal voice level, often due to 
+nervousness, excitement, or stress.
+    </pre>
+    <div class="answer-footer">
+      👍 <span>10</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="question-card" data-role="my-answer">
+  
+<div class="question-contener">
+  <h3 class="question">
+    What is Elevated pitch?
+  </h3>
+
+  <p class="question-desc">
+    I want defination.
+  </p>
+
+  <span class="tag">English</span>
+
+  <!-- Answer Section -->
+  <div class="answer-box">
+    <p class="answer-title"><strong>your answer</strong>:</p>
+
+    <pre class="code">
+      
+Elevated pitch is when a person speaks in a 
+higher-than-normal voice level, often due to 
+nervousness, excitement, or stress.
+    </pre>
+    <div class="answer-footer">
+      👍 <span>10</span>
+    </div>
+  </div>
+   <button class="status approved">✅Approved</button>
+</div>
+</div>
+
+<div class="question-card" data-role="my-answer">
+  
+<div class="question-contener">
+  <h3 class="question">
+    How do I center a div in CSS?
+  </h3>
+
+  <p class="question-desc">
+    I've been trying to center a dive horizontally and vertical.
+  </p>
+
+  <span class="tag">CSS</span>
+
+  <!-- Answer Section -->
+  <div class="answer-box">
+    <p class="answer-title"><strong>your answer</strong>:</p>
+<pre class="code">
+      div{
+        text-align: center;
+      }    </pre>
+    <br>
+    <h2>Reason</h2>
+     <pre class="code">
+      text-align: center; 
+      centers content inside the div, not the div itself.
+      To center a div, use 
+      margin: auto or Flexbox.</pre>
+          <div class="answer-footer">
+      👍 <span>10</span>
+    </div>
+  </div>
+   <button class="status rejected">❌Rejected</button>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+
+    <!-- MODAL -->
+    <div id="questionModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="closeModal">✖</span>
+        <h2>Ask a Question</h2>
+        <label>Question Title</label>
+        <input type="text">
+        <label>Details</label>
+        <textarea></textarea>
+        <label>Tags</label>
+        <input type="text">
+        <div class="button-group">
+          <button id="cancelBtn">Cancel</button>
+          <button type="submit" onclick="submita()">Post Question</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <footer class="foot">@ 2026 Student Club All rights reseved</footer>
+      <script>
+const modal = document.getElementById("questionModal");
+const openBtn = document.getElementById("openModal");
+const cancelBtn = document.getElementById("cancelBtn");
+const closeBtn = document.getElementById("closeModal");
+
+openBtn.onclick = () => modal.style.display = "flex";
+cancelBtn.onclick = closeBtn.onclick = () => modal.style.display = "none";
+
+function like(el) {
+  let count = el.querySelector("b");
+  count.innerText = parseInt(count.innerText) + 1;
+}
+
+function toggleAnswer(btn) {
+  const answerBox = btn.closest('.question-card').querySelector('.comment-box');
+  answerBox.style.display = answerBox.style.display === "none" ? "block" : "none";
+}
+
+    </script>
+
+
+
+<script>
+function side(){
+    document.getElementById("layout").classList.toggle("show");
+}
+
+function logout() {
+    window.location.href = "../login.html";
+}
+
+function post(){
+  alert("Response submitted successfully.Please wait for verification")
+}
+function submita(){
+   alert("question submitted successfully.Please wait for answer")
+
+}
+
+function showAll() {
+  document.querySelectorAll(".question-card").forEach(card => {
+    card.style.display = card.dataset.role === "community" ? "flex" : "none";
+  });
+}
+
+function showMyQuestions() {
+  document.querySelectorAll(".question-card").forEach(card => {
+    card.style.display = card.dataset.role === "my-question" ? "flex" : "none";
+  });
+}
+
+function showMyAnswers() {
+  document.querySelectorAll(".question-card").forEach(card => {
+    card.style.display = card.dataset.role === "my-answer" ? "flex" : "none";
+  });
+}
+function setActive(clickedBtn) {
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.classList.remove("filter-active");
+  });
+  clickedBtn.classList.add("filter-active");
+}
+
+</script>
+
+</body>
+</html>

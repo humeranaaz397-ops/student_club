@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+
+}           
+/* ================= TOP NAV ================= */
+.top-nav{
+    background:#2c2a99;
+    color:white;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo i{ cursor:pointer; }
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-size:14px;
+}
+
+/* ================= LAYOUT ================= */
+.layout{
+    display:grid;
+    grid-template-columns:0px 1fr;
+    transition:grid-template-columns 0.35s ease;
+}
+
+/* WHEN SIDEBAR OPEN */
+.layout.show{
+    grid-template-columns:220px 1fr;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    background:lightgrey;
+    min-height:calc(100vh - 60px);
+    border-right:1px solid #ddd;
+    overflow:hidden;
+    transition:0.35s ease;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding-top:10px;
+}
+
+.sidebar li{
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.sidebar li:hover{
+    background:#e5efff;
+    color:#2563eb;
+}
+
+.sidebar i{
+    min-width:22px;
+}
+
+/* ACTIVE ITEM */
+.sidebar li.active{
+    background:#e5efff;
+    color:#2563eb;
+    border-left:4px solid #2563eb;
+}
+/* ================= FOOTER ================= */
+
+
+        .foot{
+     background-color: #2c2a99;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 16px;
+        }
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .layout.show{
+        grid-template-columns:60px 1fr;
+    }
+
+    .sidebar span{
+        display:none;
+    }
+}
+
+a{
+    text-decoration:none;
+    color:black;
+}
+        /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  /* TOP NAV */
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  /* SIDEBAR */
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  /* MAIN CONTENT */
+  .main-content {
+    padding: 12px;
+  }
+}
+
+.content{
+    padding:20px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap:20px;
+    margin:30px 0;
+}
+
+.card{
+    background:whitesmoke;
+    padding:20px;
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+}
+
+.btn-outline{
+    width:100px;
+    height:40px;
+    background:rgba(255, 99, 71, 0.642);
+    border:transparent;
+    color:white;
+    border-radius:20px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.card1{
+    width: 100%;
+    height: 80px;
+    border-radius:10px;
+    background-color: aliceblue;
+    padding: 10px;
+    padding-top: 20px;
+}
+
+.parent20{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.pending{
+    background:whitesmoke;
+    padding:20px;
+    border-radius:10px;
+    margin-top:30px;
+}
+
+.pending-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.pending-item10{
+    background:#90e0ef;
+    padding:15px;
+    border-radius:10px;
+    margin:10px 0;
+    height:auto;   
+}
+.card{
+    cursor:pointer;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-6px) scale(1.02);
+    box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+
+.card:active{
+    transform:scale(0.98);
+}
+.btn1{
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #2563eb;
+    color: whitesmoke;
+    border-color: none;
+    cursor:pointer;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.btn1:hover{
+    background-color: #2c2a99;
+}
+.pending-item10 button{
+    margin:5px 5px 0 0;
+}
+.cards{
+    grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+}
+@media (max-width: 600px) {
+
+  h1{
+    font-size:22px;
+  }
+
+  h3{
+    font-size:20px;
+  }
+
+  .card{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .pending-item{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+  }
+
+  .pending-item i{
+    font-size:36px;
+  }
+
+  .btn-outline{
+    width:auto;
+    padding:6px 14px;
+    height:auto;
+  }
+
+  .btn1{
+    width:100%;
+  }
+
+  .pending-item10{
+    padding:12px;
+  }
+
+  .pending-item10 p{
+    margin-left:0 !important;
+    font-size:14px;
+  }
+
+  .logo span{
+    display:none;
+  }
+}
+
+h1{
+  font-size:28px;
+}
+.subtitle{
+  color:#666;
+  margin-bottom:20px;
+}
+
+/* ===== Stats ===== */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+  margin-bottom:25px;
+}
+.stat{
+  background:#fff;
+  padding:18px;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+.stat-icon{
+  width:40px;
+  height:40px;
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-weight:bold;
+}
+
+.stat{
+    cursor:pointer;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat:hover{
+    transform:translateY(-6px) scale(1.02);
+    box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+
+.stat:active{
+    transform:scale(0.98);
+}
+.orange{background:#ff8c42;}
+.blue{background:#4a90e2;}
+.green{background:#27ae60;}
+.purple{background:#9b59b6;}
+.stat h3{font-size:22px;}
+.stat span{color:#777;font-size:14px;}
+
+/* ===== Reports ===== */
+.report{
+  background:#fff;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:15px;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);
+}
+.report-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+.report-title{
+  font-size:18px;
+  font-weight:bold;
+}
+.badge{
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+  margin-left:5px;
+}
+.high{background:#ffd6d6;color:#c0392b;}
+.medium{background:#ffe6b3;color:#d35400;}
+.low{background:#e6f4ea;color:#2e7d32;}
+.open{background:#e3f2fd;color:#1565c0;}
+.resolved{background:#d4edda;color:#155724;}
+
+.report-info{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:10px;
+  margin-bottom:15px;
+  font-size:14px;
+}
+
+/* ===== Buttons ===== */
+.actions button{
+  padding:8px 14px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  margin-right:5px;
+}
+.view{background-color: #2563eb;color:#fff;}
+.view:hover{
+    background-color:  #2c2a99;
+}
+.investigate{background: #2563eb;color:#fff;}
+.investigate:hover{
+    background-color:  #2c2a99;
+}
+.resolve{background:#27ae60;color:#fff;}
+.dismiss{background:#ddd;}
+.actions button:hover{opacity:.85}
+
+
+</style>
+</head>
+<body>
+    
+    <!-- ================= TOP NAV ================= -->
+<header class="top-nav">
+    <div class="logo">
+        <i class="fa-solid fa-bars" onclick="side()"></i>
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Student Club</span>
+    </div>
+
+    <div class="nav-actions">
+        <a href="notification.html" style="color:white">
+            <i class="fa-regular fa-bell"></i>
+        </a>
+
+        <a href="adminprofile.html" style="color:white">
+            <i class="fa-solid fa-user"></i>
+            <span>Humera</span>
+        </a>
+
+        <!-- LOGOUT ICON  -->
+         <i class="fa-solid fa-right-from-bracket" onclick="logout()" style="cursor:pointer;"></i>
+    </div>
+</header>
+
+<div class="layout" id="layout">
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+<ul>
+    <li ><a href="admindashboard.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+    <li><a href="manage.html"><i class="fa-solid fa-users"></i><span>Manage Users</span></a></li>
+    <li ><a href="content.html"><i class="fa-solid fa-file"></i><span>Content</span></a></li>
+     <li ><a href="controlpanel.html"><i class="fa-solid fa-gamepad"></i><span>Control Panel</span></a></li>
+    <li><a href="analytics.html"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></a></li>
+    <li class="active"><a href="reports.html"><i class="fa-solid fa-flag"></i><span>Reports</span></a></li>
+    <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+</ul>
+</aside>
+<div class="main content">
+<h1>Admin Dashboard</h1>
+<p class="subtitle">Reports & Issues – Handle user reports and platform issues</p>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-icon orange">⚑</div>
+    <div><h3 id="openCount">12</h3><span>Open Reports</span></div>
+  </div>
+  <div class="stat">
+    <div class="stat-icon blue">🔍</div>
+    <div><h3>5</h3><span>Under Investigation</span></div>
+  </div>
+  <div class="stat">
+    <div class="stat-icon green">✔</div>
+    <div><h3>8</h3><span>Resolved Today</span></div>
+  </div>
+  <div class="stat">
+    <div class="stat-icon purple">📊</div>
+    <div><h3>34</h3><span>Total This Week</span></div>
+  </div>
+</div>
+
+<!-- Report 1 -->
+<div class="report">
+  <div class="report-top">
+    <div class="report-title">Inappropriate Content</div>
+    <div>
+      <span class="badge high">high</span>
+      <span class="badge open status">open</span>
+    </div>
+  </div>
+
+  <div class="report-info">
+    <div><b>Reporter:</b> Alice Johnson</div>
+    <div><b>Item:</b> JavaScript Tutorial #5</div>
+    <div><b>Date:</b> 2026-01-03</div>
+  </div>
+
+  <div class="actions">
+    <button class="view">View Details</button>
+    <button class="investigate">Start Investigation</button>
+    <button class="dismiss">Dismiss</button>
+  </div>
+</div>
+
+<!-- Report 2 -->
+<div class="report">
+  <div class="report-top">
+    <div class="report-title">Copyright Violation</div>
+    <div>
+      <span class="badge medium">medium</span>
+      <span class="badge open status">open</span>
+    </div>
+  </div>
+
+  <div class="report-info">
+    <div><b>Reporter:</b> System</div>
+    <div><b>Item:</b> Advanced Python Guide</div>
+    <div><b>Date:</b> 2026-01-02</div>
+  </div>
+
+  <div class="actions">
+    <button class="view">View Details</button>
+    <button class="investigate">Start Investigation</button>
+    <button class="dismiss">Dismiss</button>
+  </div>
+</div>
+
+<!-- Report 3 -->
+<div class="report">
+  <div class="report-top">
+    <div class="report-title">Platform Bug</div>
+    <div>
+      <span class="badge low">low</span>
+      <span class="badge resolved status">resolved</span>
+    </div>
+  </div>
+
+  <div class="report-info">
+    <div><b>Reporter:</b> Carol White</div>
+    <div><b>Item:</b> Web Development Course</div>
+    <div><b>Date:</b> 2026-01-02</div>
+  </div>
+
+  <div class="actions">
+    <button class="resolve">✔ Resolved</button>
+  </div>
+</div>
+</div>
+<div id="report-detail" style="display:none; padding:20px;">
+    <button onclick="backToReports()" style="margin-bottom:20px; padding:8px 14px; border:none; border-radius:6px; background:#2563eb; color:white; cursor:pointer;">⬅ Back to Reports</button>
+    <h2 id="detail-title"></h2>
+    <div id="detail-info" style="margin-top:15px; background:#f5f5f5; padding:15px; border-radius:10px;"></div>
+</div>
+</div>
+    <footer class="foot">@ 2026 Student Club All rights reserved</footer>
+
+
+
+<script>
+function side(){
+    document.getElementById("layout").classList.toggle("show");
+}
+
+
+function logout() {
+    window.location.href = "../login.html";
+}
+
+let openCount = document.getElementById("openCount");
+
+document.querySelectorAll(".view").forEach(btn=>{
+  btn.onclick=()=>alert("Opening report details...");
+});
+
+document.querySelectorAll(".investigate").forEach(btn=>{
+  btn.onclick=()=>{
+    const report = btn.closest(".report");
+    const status = report.querySelector(".status");
+    status.textContent="investigating";
+    status.className="badge open status";
+  };
+});
+
+document.querySelectorAll(".resolve").forEach(btn=>{
+  btn.onclick=()=>{
+    const report = btn.closest(".report");
+    const status = report.querySelector(".status");
+    status.textContent="resolved";
+    status.className="badge resolved status";
+    btn.disabled=true;
+  };
+});
+
+document.querySelectorAll(".dismiss").forEach(btn=>{
+  btn.onclick=()=>{
+    const report = btn.closest(".report");
+    report.remove();
+    openCount.textContent = Math.max(0, openCount.textContent-1);
+  };
+});
+const reportDetail = document.getElementById("report-detail");
+const detailTitle = document.getElementById("detail-title");
+const detailInfo = document.getElementById("detail-info");
+const mainContent = document.querySelector(".main.content"); // dashboard content
+
+// Open report details
+document.querySelectorAll(".view").forEach(btn => {
+  btn.onclick = () => {
+    const report = btn.closest(".report");
+
+    // Hide main dashboard content
+    mainContent.style.display = "none";
+
+    // Show report detail container
+    reportDetail.style.display = "block";
+
+    // Set the title and info
+    const title = report.querySelector(".report-title").textContent;
+    detailTitle.textContent = title;
+
+    const reporter = report.querySelector(".report-info div:nth-child(1)").textContent;
+    const item = report.querySelector(".report-info div:nth-child(2)").textContent;
+    const date = report.querySelector(".report-info div:nth-child(3)").textContent;
+    const badges = report.querySelectorAll(".badge");
+
+    let badgeHTML = "";
+    badges.forEach(b => badgeHTML += `<span class="badge ${b.classList[0]}">${b.textContent}</span> `);
+
+    detailInfo.innerHTML = `
+      <p><b>${reporter}</b></p>
+      <p><b>${item}</b></p>
+      <p><b>${date}</b></p>
+      <p>${badgeHTML}</p>
+    `;
+  };
+});
+
+// Back to dashboard/reports
+function backToReports() {
+  reportDetail.style.display = "none";
+  mainContent.style.display = "block";
+}
+
+</script>
+
+
+
+</body>
+</html>
+

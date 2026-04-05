@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+    
+}
+body{
+     background: #f4f9ff;
+}
+/* ================= TOP NAV ================= */
+.top-nav{
+    background:#2c2a99;
+    color:white;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo i{ cursor:pointer; }
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-size:14px;
+}
+
+/* ================= LAYOUT ================= */
+.layout{
+    display:grid;
+    grid-template-columns:0px 1fr;
+    transition:grid-template-columns 0.35s ease;
+}
+
+/* WHEN SIDEBAR OPEN */
+.layout.show{
+    grid-template-columns:220px 1fr;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    background:lightgrey;
+    min-height:calc(100vh - 60px);
+    border-right:1px solid #ddd;
+    overflow:hidden;
+    transition:0.35s ease;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding-top:10px;
+}
+
+.sidebar li{
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.sidebar li:hover{
+    background:#e5efff;
+    color:#2563eb;
+}
+
+.sidebar i{
+    min-width:22px;
+}
+
+/* ACTIVE ITEM */
+.sidebar li.active{
+    background:#e5efff;
+    color:#2563eb;
+    border-left:4px solid #2563eb;
+}
+/* ================= FOOTER ================= */
+ 
+        .foot{
+     background-color: #2c2a99;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 16px;
+        }  .educator-hero {
+  padding: 60px 40px;
+}
+
+a{
+    text-decoration:none;
+    color:black;
+}
+
+/* ================= CONTENT ================= */
+.content{
+    flex:1;
+    padding:24px;
+}
+.cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+.card h4 {
+      font-size: 17px;;
+      margin-bottom: 8px;
+    }
+
+    .card span {
+      font-size: 24px;
+      font-weight: 700;
+      color: #111827;
+    }
+.card i{
+    font-size:35px;
+    color:#2c2a99;
+}
+ .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+  
+
+/* ================= COURSE CARDS ================= */
+.parent20{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:40px;
+}
+.card1{
+    width:330px;
+    height:350px;
+    background:linear-gradient(180deg,#ffffff,#f4fbff);
+    border-radius:12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.916);
+    overflow:hidden;
+    transition:transform 0.25s, box-shadow 0.25s;
+}
+.card1:hover{ transform:translateY(-10px); box-shadow:0 12px 25px rgba(0,0,0,0.2); }
+.card1 img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.916);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+ 
+}
+.card1 div{
+    padding:15px;
+} 
+
+/* ================= LIVE CLASSES ================= */
+.pending{
+    background:whitesmoke;
+    padding:20px;
+    border-radius:10px;
+    margin-top:30px;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.916);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+      }
+
+.pending-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:#e0f0ff;
+    padding:15px;
+    border-radius:10px;
+    margin:10px 0;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.btn-outline{
+    background:#2563eb;
+    border:none;
+    color:white;
+    padding:10px 16px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.btn-outline:hover{ 
+    
+    background:#1e40af;
+ color:white; }
+
+    /* Hero Section */
+    .hero {
+      background: white;
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-content h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1d4ed8;
+    }
+
+    .hero-content p {
+      font-size: 16px;;
+      margin-bottom: 16px;
+    }
+
+    .actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      background: #eef2ff;
+      color: #3730a3;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .btn-secondary:hover {
+      background: #c7d2fe;
+    }
+
+    .hero-image {
+      flex: 1;
+      text-align: right;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+.progress-card {
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    .progress-card h3 {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress {
+      width: 62%;
+      height: 100%;
+      background: linear-gradient(90deg, #6366f1, #22d3ee);
+    }
+/* ================= MOBILE RESPONSIVE FIX ================= */
+@media (max-width: 768px) {
+
+  /* TOP NAV */
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 0 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  /* SIDEBAR */
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  /* CONTENT */
+  .content {
+    padding: 14px;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-content {
+    width: 100%;
+  }
+
+  .hero-content h2 {
+    font-size: 20px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+
+  .actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero-image {
+    text-align: center;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+  }
+
+  /* STATS CARDS */
+  .cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* COURSE CARDS */
+  .parent20 {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card1 {
+    width: 100%;
+    max-width: 360px;
+    height: auto;
+  }
+
+  /* LIVE CLASSES */
+  .pending-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pending-item button {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* PROGRESS */
+  .progress-card h3 {
+    font-size: 14px;
+  }
+
+  /* FOOTER */
+  .foot {
+    font-size: 14px;
+    padding: 14px;
+  }
+}
+
+/* EXTRA SMALL DEVICES */
+@media (max-width: 480px) {
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h2 {
+    font-size: 18px;
+  }
+
+  .hero-content p {
+    font-size: 13px;
+  }
+
+  
+  .btn-secondary {
+    width: 100%;
+  }
+  .table-wrapper{
+    overflow: hidden;
+  }
+}
+
+.table-panel {
+  background: white;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  animation: fadeSlide 0.35s ease;
+}
+
+.table-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.table-header h2 {
+  font-size: 22px;
+  color: #1d4ed8;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 400px;
+}
+
+thead {
+  background: #eef2ff;
+}
+
+th, td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  font-size: 14px;
+  color: #1e3a8a;
+}
+
+td {
+  font-size: 14px;
+}
+
+tr:hover {
+  background: #f8fafc;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.done {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status .pending {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+table button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= TOP NAV ================= -->
+<header class="top-nav">
+    <div class="logo">
+        <i class="fa-solid fa-bars" onclick="side()"></i>
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Student Club</span>
+    </div>
+
+    <div class="nav-actions">
+        <a href="notification(s).html" style="color:white">
+            <i class="fa-regular fa-bell"></i>
+        </a>
+
+        <a href="studentprofile.html" style="color:white">
+            <i class="fa-solid fa-user"></i>
+            <span>Sudharshan</span>
+        </a>
+
+        <!-- LOGOUT ICON  -->
+        <i class="fa-solid fa-right-from-bracket" onclick="logout()" style="cursor:pointer;"></i>
+
+    </div>
+</header>
+
+<div class="layout" id="layout">
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar">
+    <ul>
+        <li class="active"><a href="studentdashboard.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+        <li><a href="q&a(s).html"><i class="fa-solid fa-clipboard-question"></i><span>Q&A</span></a></li>
+        <li><a href="studymaterial(s).html"><i class="fa-solid fa-file-lines"></i><span>Study Materials</span></a></li>
+        <li><a href="video(s).html"><i class="fa-solid fa-video"></i><span>Video Learning</span></a></li>
+        <li><a href="liveclasses(s).html"><i class="fa-brands fa-youtube"></i><span>Live Classes</span></a></li>
+        <li><a href="course.html"><i class="fa-solid fa-book-open"></i><span>Courses</span></a></li>
+        <li><a href="findpeople(s).html"><i class="fa-solid fa-users"></i><span>Find People</span></a></li>
+        <li><a href="chat(s).html"><i class="fa-solid fa-comment-dots"></i><span>Chat</span></a></li>
+        <li><a href="learningprogress(s).html"><i class="fa-solid fa-arrow-trend-up"></i><span>Progress</span></a></li>
+        
+    </ul>
+</aside>
+
+<!-- ================= MAIN CONTENT ================= -->
+<main class="content">
+    
+    
+    <section class="hero">
+        
+      <div class="hero-content">
+        <div class="streak-badge">🔥 Streak: <strong id="streakCount" aria-live="polite">5</strong></div>
+            <br>
+        
+        <h2>Today is the day you build momentum — start small, achieve big.</h2>
+        <p>One focused session today — one big step toward your goals.</p>
+        <div class="actions">
+          <button class="btn-secondary" onclick="openSchedule()">View Schedule</button>
+
+
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="https://i.postimg.cc/5Nszzxpx/IMG-20260114-WA0068.jpg" alt="Student studying">
+      </div>
+    </section>
+
+    <div class="cards">
+       <div class="card" onclick="openCourses()">
+
+            <div>
+                <i class="fa-solid fa-book-open"></i><br><br>
+                <h4>Enrolled Courses</h4>
+                <b>8</b>
+            </div>
+        </div>
+
+       <div class="card" onclick="openVideos()">
+     <div>
+                <i class="fa-solid fa-video"></i><br><br>
+                <h4>Videos Watched</h4>
+                <b>42</b>
+            </div>
+        </div>
+
+<div class="card" onclick="openCertificates()">
+
+
+            <div>
+                <i class="fa-solid fa-trophy"></i><br><br>
+                <h4>Certificates</h4>
+                <b>3</b>
+            </div>
+        </div>
+
+       <div class="card" onclick="openStudyHours()">
+   <div>
+                <i class="fa-regular fa-clock"></i><br><br>
+                <h4>Study Hours</h4>
+                <b>87</b>
+            </div>
+        </div>
+    </div>
+
+    <section class="progress-card">
+      <h3>Daily Goal — Complete 1 Focus Session</h3>
+      <div class="progress-bar">
+        <div class="progress"></div>
+      </div>
+    </section><br><br>
+
+    <section class="parent20">
+        <div class="card1">
+<a href="../Videos/HTML - Introduction - W3Schools.com - w3schools.com (1080p, h264).mp4"><img src="https://images.stockcake.com/public/c/8/f/c8f3ac4b-50e9-48c3-9a74-539c8aaa72a6_large/late-night-coding-stockcake.jpg" onclick="openCourse(this.src,'Introduction to Web Development – HTML, CSS & JS')">
+</a>
+            <div>
+                <h3>Introduction to Web Development</h3>
+                <p>16 of 24 lessons completed</p>
+            </div>
+        </div>
+
+        <div class="card1">
+        <a href="../Videos/Every React Concept Explained in 12 Minutes - Code Bootcamp (1080p, h264).mp4 "><img src="https://static.vecteezy.com/system/resources/thumbnails/003/343/387/small/desktop-source-code-and-wallpaper-by-coding-and-programming-free-photo.jpg">
+          </a>  <div>
+                <h3>Data Structures & Algorithms</h3>
+                <p>9 of 30 lessons completed</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="pending">
+        <h3>Upcoming Live Classes</h3>
+
+        <div class="pending-item">
+            <div>
+                <b>Advanced React Patterns</b><br>
+                🧑‍🎓 Humera Naaz · ⏱️ 03/01/2026 · ⌚ 90 mins · 👥 45
+            </div>
+            <button class="btn-outline"><a href="https://meet.google.com/ext-pkxr-mfu" style="color: whitesmoke;">Join Class</a></button>
+        </div>
+
+        <div class="pending-item">
+            <div>
+                <b>Database Design Principles</b><br>
+                🧑‍🎓 Sai Charan · ⏱️ 03/01/2026 · ⌚ 90 mins · 👥 45
+            </div>
+            <button class="btn-outline"><a href="https://meet.google.com/ext-pkxr-mfu" style="color: whitesmoke;">Join Class</a></button>
+        </div>
+    </div>
+    <!-- ================= DYNAMIC PAGES ================= -->
+    <section id="tablePanel" class="table-panel" style="display:none;">
+  <div class="table-header">
+    <button class="btn-secondary" onclick="goBack()">← Back</button>
+    <h2 id="tableTitle"></h2>
+  </div>
+
+  <div class="table-wrapper">
+    <table id="dataTable">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</section>
+
+</div>
+<footer class="foot">@ 2026 Student Club All rights reserved</footer>
+
+<script>
+function side() {
+  document.getElementById("layout").classList.toggle("show");
+}
+
+function logout() {
+    window.location.href = "../login.html";
+}
+
+function statusClick(type, title) {
+  alert(type + " clicked for: " + title);
+  // Later you can open modal, redirect, etc.
+}
+
+function hideDashboard() {
+  document.querySelectorAll(
+    ".hero, .cards, .progress-card, .parent20, .pending"
+  ).forEach(el => el.style.display = "none");
+}
+
+function goBack() {
+  document.getElementById("tablePanel").style.display = "none";
+  document.querySelectorAll(
+    ".hero, .cards, .progress-card, .parent20, .pending"
+  ).forEach(el => el.style.display = "");
+}
+
+function openTable(title, headers, rows) {
+  hideDashboard();
+
+  document.getElementById("tablePanel").style.display = "block";
+  document.getElementById("tableTitle").innerText = title;
+
+  const thead = document.querySelector("#dataTable thead");
+  const tbody = document.querySelector("#dataTable tbody");
+
+  thead.innerHTML = "<tr>" + headers.map(h => `<th>${h}</th>`).join("") + "</tr>";
+  tbody.innerHTML = rows.map(row =>
+    "<tr>" + row.map(col => `<td>${col}</td>`).join("") + "</tr>"
+  ).join("");
+}
+
+/* ===== TABLE OPENERS ===== */
+function openSchedule() {
+  openTable(
+    "📅 Today's Schedule",
+    ["Date", "Time", "Title", "Status"],
+    [
+      ["03/01/2026", "10:00 – 11:00", "HTML & CSS",
+        `<button onclick="statusClick('Completed','HTML & CSS')">
+           <span class='status done'>Completed</span>
+         </button>`],
+
+      ["03/01/2026", "01:00 – 02:30", "DSA Practice",
+        `<button onclick="statusClick('Pending','DSA Practice')">
+           <span class='status pending'>Pending</span>
+         </button>`],
+
+      ["03/01/2026", "04:00 – 05:30", "React Live Class",
+        `<button onclick="statusClick('Upcoming','React Live Class')">
+           <span class='status pending'>Upcoming</span>
+         </button>`],
+
+      ["03/01/2026", "08:00 – 09:00", "Revision & Notes",
+        `<button onclick="statusClick('Pending','Revision & Notes')">
+           <span class='status pending'>Pending</span>
+         </button>`]
+    ]
+  );
+}
+
+function openCourses() {
+  openTable(
+    "📚 Enrolled Courses",
+    ["Course Title", "Start Date", "Progress", "Status"],
+    [
+      ["Web Development", "01/12/2025", "65%", "<span class='status pending'>In Progress</span>"],
+      ["DSA", "15/12/2025", "30%", "<span class='status pending'>In Progress</span>"],
+      ["DBMS", "20/12/2025", "100%", "<span class='status done'>Completed</span>"]
+    ]
+  );
+}
+
+function openVideos() {
+  openTable(
+    "🎬 Videos Watched",
+    ["Date", "Duration", "Video Title", "Status"],
+    [
+      ["02/01/2026", "12 min", "HTML Basics", "<span class='status done'>Watched</span>"],
+      ["01/01/2026", "18 min", "CSS Flexbox", "<span class='status done'>Watched</span>"],
+      ["31/12/2025", "22 min", "React Hooks", "<span class='status done'>Watched</span>"]
+    ]
+  );
+}
+
+function openCertificates() {
+  openTable(
+    "🏆 Certificates",
+    ["Issue Date", "Certificate Title", "Issuer", "Status"],
+    [
+      ["25/12/2025", "Web Development", "Student Club", "<span class='status done'>Issued</span>"],
+      ["30/12/2025", "DSA", "Student Club", "<span class='status done'>Issued</span>"]
+    ]
+  );
+}
+
+function openStudyHours() {
+  openTable(
+    "⏱ Study Hours",
+    ["Date", "Duration", "Topic", "Type"],
+    [
+      ["01/01/2026", "2 hrs", "HTML Practice", "Self Study"],
+      ["02/01/2026", "3 hrs", "DSA Arrays", "Practice"],
+      ["03/01/2026", "1.5 hrs", "React Basics", "Live Class"]
+    ]
+  );
+}
+</script>
+
+</body>
+</html>
+
+

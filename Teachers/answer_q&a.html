@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+           
+/* ================= TOP NAV ================= */
+.top-nav{
+    background: #2c2a99;
+    color:white;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo i{ cursor:pointer; }
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-size:14px;
+}
+
+/* ================= LAYOUT ================= */
+.layout{
+    display:grid;
+    grid-template-columns:0px 1fr;
+    transition:grid-template-columns 0.35s ease;
+}
+
+/* WHEN SIDEBAR OPEN */
+.layout.show{
+    grid-template-columns:220px 1fr;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    background:lightgrey;
+    min-height:calc(100vh - 60px);
+    border-right:1px solid #ddd;
+    overflow:hidden;
+    transition:0.35s ease;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding-top:10px;
+}
+
+.sidebar li{
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.sidebar li:hover{
+    background:#e5efff;
+    color:#2563eb;
+}
+
+.sidebar i{
+    min-width:22px;
+}
+
+/* ACTIVE ITEM */
+.sidebar li.active{
+    background:#e5efff;
+    color:#2563eb;
+    border-left:4px solid #2563eb;
+}
+/* ================= FOOTER ================= */
+
+        .foot{
+     background-color: #2c2a99;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 16px;
+        }
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .layout.show{
+        grid-template-columns:60px 1fr;
+    }
+
+    .sidebar span{
+        display:none;
+    }
+    .answerbox div h2{
+        font-size:16px;
+    }
+}
+
+a{
+    text-decoration:none;
+    color:black;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f4ff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.hero-text {
+    max-width: 60%;
+}
+.hero-text h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}   
+.hero-sub {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555;
+}   
+.hero-actions {
+    display: flex;
+    gap: 10px;
+}
+.hero-actions input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+.hero-actions .ask-btn.small {
+    padding: 10px 16px;
+    font-size: 14px;
+}
+.hero-image img {
+    max-width: 200px;
+    border-radius: 10px;
+}
+        /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  /* TOP NAV */
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  /* SIDEBAR */
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  /* MAIN CONTENT */
+  .main-content {
+    padding: 12px;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions input {
+    width: 100%;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  #para1, #para2, #para3, #para4 {
+    height: 80px;
+    width: 100%; 
+  }
+}
+
+.ask-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+.active{
+  background-color: #2c2a99;
+  color: whitesmoke;
+}
+.main-content {
+    padding: 20px;  
+    background-color: #ffffff;
+    border-radius: 10px;  
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+.answerbox {
+    display: flex;
+    gap: 20px;  
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+button {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+
+    cursor: pointer;  
+    font-size: 14px;
+    margin-top: 10px;
+}
+button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+#btn {
+    background-color: #007bff;
+    color: white;
+}
+#btn:hover {
+    background-color: #0056b3;
+    color: white;
+}
+#para1 {
+    width: 100%;
+    height: 100px; 
+    margin-top: 10px;
+}
+#para2 {
+    width: 100%;
+    height: 100px; 
+    margin-top: 10px;
+}
+#para3 {
+    width: 100%;
+    height: 100px; 
+    margin-top: 10px;
+}
+#para4 {
+    width: 100%;
+    height: 100px; 
+    margin-top: 10px;
+}.question-card {
+  display: none;
+}
+
+.question-card[data-role="community"] {
+  display: flex;
+}
+
+
+
+.qa-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 80%;
+  margin: 20px auto;
+  background: #f9f9f9;
+}
+
+.question {
+  margin: 0;
+  font-size: 20px;
+}
+
+.question-desc {
+  color: #555;
+}
+
+.tag {
+  display: inline-block;
+  background: #4dd0e1;
+  color: #000;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.answer-box {
+  margin-top: 15px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 5px solid #1976d2;
+}
+
+.answer-title {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.code {
+  background: #f1f1f1;
+  padding: 10px;
+  border-radius: 6px;
+  font-family: monospace;
+}
+
+.answer-footer {
+  margin-top: 10px;
+  color: #ff9800;
+  font-weight: bold;
+}
+/* ===== REJECT BOX ===== */
+.reject-box {
+  margin-top: 12px;
+  padding: 10px;
+  background: #fff3f3;
+  border: 1px solid #ffb3b3;
+  border-radius: 6px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.reject-box input {
+  flex: 1;
+  padding: 8px 10px;
+  border: 1px solid #ff9999;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.reject-box button {
+  background: #e53935;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.reject-box button:hover {
+  background: #c62828;
+}
+
+    </style>
+</head>
+<body>
+ 
+    <!-- ================= TOP NAV ================= -->
+<header class="top-nav">
+    <div class="logo">
+        <i class="fa-solid fa-bars" onclick="side()"></i>
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Student Club</span>
+    </div>
+
+    <div class="nav-actions">
+        <a href="notification(T).html" style="color:white">
+            <i class="fa-regular fa-bell"></i>
+        </a>
+
+        <a href="studentprofile.html" style="color:white">
+            <i class="fa-solid fa-user"></i>
+            <span>Aditya</span>
+        </a>
+
+        <!-- LOGOUT ICON  -->
+          <i class="fa-solid fa-right-from-bracket" onclick="logout()" style="cursor:pointer;"></i>
+
+        
+    </div>
+</header>
+
+<div class="layout" id="layout">
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar">
+    <ul>
+        <li ><a href="teacherdashboard.html"><i class="fa-solid fa-grip"></i><span> Dashboard</span></a></li>
+                <li><a href="uploadpdf.html"><i class="fa-solid fa-upload"></i> <span>Upload Material</span></a></li>
+                <li><a href="uploadvideo.html"><i class="fa-solid fa-video"></i> <span>Upload Video</span></a></li>
+                <li ><a href="quiz.html"><i class="fa-solid fa-clipboard-list"></i> <span>Create Quiz</span></a></li>
+                <li><a href="teacher live classes.html"><i class="fa-solid fa-wifi"></i> <span>Live Classes</span></a></li>
+                <li class="active"><a href="answer_q&a.html"><i class="fa-solid fa-circle-question"></i> <span>Answer Q&A</span></a></li>
+                <li><a href="post_notification.html"><i class="fa-regular fa-bell"></i> <span>Post Notification</span></a></li>
+                <li><a href="chat(T).html"><i class="fa-regular fa-comment"></i><span> Chat</span></a></li>
+                <li><a href="findpeople(T).html"><i class="fa-solid fa-users"></i> <span>Find People</a></li>
+          
+         </ul>
+</aside>
+
+    <main class="main-content">
+        <div class="hero">
+      <div class="hero-text">
+        <h1>  Empower Minds, Ignite answers on! ✨</h1>
+        <p class="hero-sub">"Each answer you share lights a paths-today's learing becomes tomorrow's leadership!".</p>
+        <div class="hero-actions">
+          <input id="searchInput" type="text" placeholder="Search questions, tags or topics..." />
+          <button id="searchBtn" class="ask-btn small">Search</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://i.postimg.cc/rw92TPQJ/IMG-20260117-WA0014.jpg" alt="Students studying together">
+      </div>
+    </div> 
+ <div>
+  <button class="ask-btn filter-btn" onclick="setActive(this); showAll()">All Questions</button>
+<button class="ask-btn filter-btn" onclick="setActive(this); showMyAnswers()">My Answers</button>
+<button class="ask-btn filter-btn" onclick="setActive(this); showstudents()">Students answers</button>
+<button class="ask-btn filter-btn" onclick="setActive(this); openModal()">Approved answers</button>
+
+ </div>
+ <br>
+            <!-- ===== ANSWERBOXES ===== -->
+            <div style="display: flex;" class="answerbox question-card" data-role="community">
+ 
+                <div>
+                    <a href=""><i class="fa-solid fa-thumbs-up"></i>45</a><br><br>
+                    <a href=""><i class="fa-regular fa-circle-question"></i>12</a><br><br>
+                    <a href=""><i class="fa-regular fa-circle-check"></i></a>
+                </div>
+                <div>
+                    <h2 style="margin-top: 0px;margin-bottom: 0px;">How do I center a div in CSS?</h2>
+                    <p  id="display1" style="margin-top: 10px ;margin-bottom: 10px;"></p>
+                    <div id="bottombtn">
+                        <div>
+                            <button>CSS</button>
+                            <button>Web Development</button>
+                        </div><br>
+                        <div style="display: flex; gap: 20px; align-items:center;">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6qIivAq9P3NUfmSK7jgnujOpYPFN2fcELqg&s" alt="" width="50" style="border-radius: 50px; height: 50px;">
+                            <div>
+                                <a href="" style="margin-right: 10px;">Alex Thompson</a><br>
+                                <a href="">2 hours ago</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="btn" onclick="answer()">give answer</button>
+                    </div>
+                    <div style="display: none;" id="inputbox">
+                        <input type="text" placeholder="enter your answer" id="para1" ><br><br>
+                        <button id="btn" onclick="send1()" >send</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Repeat for other 3 answerboxes (display2-4) -->
+            <div class="answerbox question-card" data-role="community">
+                <div>
+                    <a href=""><i class="fa-solid fa-thumbs-up"></i>30</a><br><br>
+                    <a href=""><i class="fa-regular fa-circle-question"></i>5</a><br><br>
+                    <a href=""><i class="fa-regular fa-circle-check"></i></a>
+                </div>
+                <div>
+                    <h2>What is the difference between let and const?</h2>
+                    <p id="display2" style="margin-top: 10px ;margin-bottom: 10px;"></p>
+                    <div id="bottombtn">
+                        <div>
+                            <button>JS</button>
+                        </div><br>
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6qIivAq9P3NUfmSK7jgnujOpYPFN2fcELqg&s" width="50" style="border-radius:50px; height: 50px;">
+                            <div>
+                                <a href="" style="margin-right: 10px;">Alex Thompson</a><br>
+                                <a href="">2 hours ago</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn" onclick="answer2()">give answer</button>
+                    <div style="display:none;" id="inputbox2" >
+                        <input type="text" id="para2" placeholder="enter your answer" ><br><br>
+                        <button id="btn" onclick="send2()">send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="answerbox question-card" data-role="community">
+                <div>
+                    <a href=""><i class="fa-solid fa-thumbs-up"></i>12</a><br><br>
+                    <a href=""><i class="fa-regular fa-circle-question"></i>2</a><br><br>
+                    <a href=""><i class="fa-regular fa-circle-check"></i></a>
+                </div>
+                <div>
+                    <h2>How do I make a responsive navbar?</h2>
+                    <p id="display3" style="margin-top: 10px ;margin-bottom: 10px;"></p>
+                    <div id="bottombtn">
+                        <div>
+                            <button>HTML</button>
+                            <button>CSS</button>
+                        </div><br>
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6qIivAq9P3NUfmSK7jgnujOpYPFN2fcELqg&s" width="50" style="border-radius:50px;height: 50px;">
+                            <div>
+                                <a href="" style="margin-right: 10px;">Alex Thompson</a><br>
+                                <a href="">2 hours ago</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn" onclick="answer3()">give answer</button>
+                    <div style="display:none;" id="inputbox3">
+                        <input type="text" id="para3" placeholder="enter your answer" ><br><br>
+                        <button id="btn" onclick="send3()" >send</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="answerbox question-card" data-role="community">
+                <div>
+                    <a href=""><i class="fa-solid fa-thumbs-up"></i>7</a><br><br>
+                    <a href=""><i class="fa-regular fa-circle-question"></i>1</a><br><br>
+                    <a href=""><i class="fa-regular fa-circle-check"></i></a>
+                </div>
+                <div>
+                    <h2>How to center text inside a div?</h2>
+                    <p id="display4" style="margin-top: 10px ;margin-bottom: 10px;"></p>
+                    <div id="bottombtn">
+                        <div>
+                            <button>CSS</button>
+                        </div><br>
+                        <div style="display:flex;gap:10px;align-items:center;">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6qIivAq9P3NUfmSK7jgnujOpYPFN2fcELqg&s" width="50" style="border-radius:50px;height: 50px;">
+                            <div>
+                                <a href="" style="margin-right: 10px;">Alex Thompson</a><br>
+                                <a href="">2 hours ago</a>
+                            </div>
+                        </div>
+                    </div>
+                    <button id="btn" onclick="answer4()">give answer</button>
+                    <div style="display:none;" id="inputbox4">
+                        <input type="text" id="para4" placeholder="enter your answer" ><br><br>
+                        <button id="btn" onclick="send4()" >send</button>
+                    </div>
+                </div>
+            </div>
+
+<div class="answerbox question-card" data-role="my-answers">
+
+<div class="question-contener">
+  <h3 class="question">
+    What is Elevated pitch?
+  </h3>
+
+  <p class="question-desc">
+    I want defination.
+  </p>
+
+  <span class="tag">English</span>
+
+  <!-- Answer Section -->
+  <div class="answer-box">
+    <p class="answer-title"><strong>your answer</strong>:</p>
+
+    <pre class="code">
+      
+Elevated pitch is when a person speaks in a 
+higher-than-normal voice level, often due to 
+nervousness, excitement, or stress.
+    </pre>
+    <div class="answer-footer">
+      👍 <span>10</span>
+    </div>
+ </div>
+
+        </div>
+    </div>
+    <!---students answers-->
+<div class="answerbox question-card" data-role="students-answers">
+
+<div class="question-contener">
+  <h3 class="question">
+    How do I center a div in CSS?
+  </h3>
+
+  <p class="question-desc">
+    I want horizontal and vertical centering.
+  </p>
+
+  <span class="tag">CSS</span>
+
+  <!-- Answer Section -->
+  <div class="answer-box">
+    <p class="answer-title">Answer by <strong>Sir Charan</strong>:</p>
+
+    <pre class="code">
+div {
+  display: center;
+}
+    </pre>
+
+    <div class="answer-footer">
+      👍 <span>10</span>
+    </div>
+    </div><button onclick="approve(this)" class="status approved">✅ Approve</button>
+<button onclick="reject(this)" class="status rejected">❌ Reject</button>
+<div class="reject-box" style="display:none;">
+  <input type="text" placeholder="Reason for rejection">
+  <button onclick="sendReject(this)">Send</button>
+</div>
+</div>
+</div>
+<div class="answerbox question-card" data-role="students-answers">
+
+<div class="question-contener">
+  <h3 class="question">
+    How do I center a div in CSS?
+  </h3>
+
+  <p class="question-desc">
+    I want horizontal and vertical centering.
+  </p>
+
+  <span class="tag">CSS</span>
+
+  <!-- Answer Section -->
+  <div class="answer-box">
+    <p class="answer-title">Answer by <strong>Sir Charan</strong>:</p>
+
+    <pre class="code">
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+    </pre>
+
+    <div class="answer-footer">
+      👍 <span>10</span>
+    </div>
+    </div><button onclick="approve(this)" class="status approved">✅ Approve</button>
+<button onclick="reject(this)" class="status rejected">❌ Reject</button>
+<div class="reject-box" style="display:none;">
+  <input type="text" placeholder="Reason for rejection">
+  <button onclick="sendReject(this)">Send</button>
+</div>
+<div class="reject-box" style="display:none;">
+  <input type="text" placeholder="Reason for rejection">
+</div>
+</div>
+  </div>
+  <div class="answerbox question-card" data-role="approved-answers">
+<div class="question-contener">
+  <h3 class="question">
+    What is Elevated pitch?
+  </h3>
+
+  <p class="question-desc">
+    I want defination.
+  </p>
+
+  <span class="tag">English</span>
+
+  <!-- Answer Section -->
+  <div class="answer-box">
+    <p class="answer-title"><strong>Answered by Charan</strong>:</p>
+
+    <pre class="code">
+      
+Elevated pitch is when a person speaks in a 
+higher-than-normal voice level, often due to 
+nervousness, excitement, or stress.
+    </pre>
+    <div class="answer-footer">
+      👍 <span>10</span>
+    </div>
+  </div>
+   <button class="status approved">✅Approved</button>
+</div>
+</div>
+</div>
+
+  </div>
+
+      <footer class="foot">
+        @ Student Club All rights reseved
+      </footer>
+    </main>
+
+  </div>
+
+
+<script>
+function side(){
+    document.getElementById("layout").classList.toggle("show");
+}
+
+
+function logout() {
+    window.location.href = "../login.html";
+}
+/* ===== ANSWER BOX JS ===== */
+function answer(){document.querySelector("#inputbox").style.display="block"}
+function answer2(){document.querySelector("#inputbox2").style.display="block"}
+function answer3(){document.querySelector("#inputbox3").style.display="block"}
+function answer4(){document.querySelector("#inputbox4").style.display="block"}
+
+function send1(){document.querySelector("#display1").innerHTML=document.querySelector("#para1").value; document.querySelector("#inputbox").style.display="none";}
+function send2(){document.querySelector("#display2").innerHTML=document.querySelector("#para2").value; document.querySelector("#inputbox2").style.display="none";}
+function send3(){document.querySelector("#display3").innerHTML=document.querySelector("#para3").value; document.querySelector("#inputbox3").style.display="none";}
+function send4(){document.querySelector("#display4").innerHTML=document.querySelector("#para4").value; document.querySelector("#inputbox4").style.display="none";}
+
+function showAll() {
+  document.querySelectorAll(".question-card").forEach(card => {
+    card.style.display = "flex";
+  });
+}
+
+function showMyAnswers() {
+  document.querySelectorAll(".question-card").forEach(card => {
+    card.style.display =
+      card.dataset.role === "my-answers" ? "flex" : "none";
+  });
+}
+
+function showstudents() {
+  document.querySelectorAll(".question-card").forEach(card => {
+    card.style.display =
+      card.dataset.role === "students-answers" ? "flex" : "none";
+  });
+}
+
+function openModal() {
+  document.querySelectorAll(".question-card").forEach(card => {
+    card.style.display =
+      card.dataset.role === "approved-answers" ? "flex" : "none";
+  });
+}
+function send1(){
+  const card = document.querySelector("#display1").closest(".question-card");
+
+  document.querySelector("#display1").innerHTML =
+    document.querySelector("#para1").value;
+
+  document.querySelector("#inputbox").style.display = "none";
+
+  // move to My Answers
+  card.dataset.role = "my-answers";
+}
+
+function approve(btn){
+  const card = btn.closest(".question-card");
+  card.dataset.role = "approved-answers";
+}
+
+function reject(btn){
+  const card = btn.closest(".question-card");
+  card.querySelector(".reject-box").style.display = "block";
+}
+
+function approve(btn){
+  btn.closest(".question-card").dataset.role = "approved-answers";
+}function showAll() {
+  document.querySelectorAll(".question-card").forEach(card => {
+    if (card.dataset.role === "approved-answers") {
+      card.style.display = "none"; // hide approved on home
+    } else {
+      card.style.display = "flex";
+    }
+  });
+}
+function approve(btn) {
+  const card = btn.closest(".question-card");
+
+  // Change role
+  card.dataset.role = "approved-answers";
+
+  // Remove Reject button
+  const rejectBtn = card.querySelector(".rejected");
+  if (rejectBtn) rejectBtn.remove();
+
+  // Change Approve button text & disable it
+  btn.textContent = "✅ Approved";
+  btn.disabled = true;
+  btn.style.backgroundColor = "#4CAF50";
+  btn.style.color = "white";
+}
+function sendReject(btn) {
+  const card = btn.closest(".question-card");
+  const reasonInput = card.querySelector(".reject-box input");
+
+  if (reasonInput.value.trim() === "") {
+    alert("Please enter rejection reason");
+    return;
+  }
+
+  // Optional: store reason (console for now)
+  console.log("Rejected reason:", reasonInput.value);
+
+  // Hide card or mark as rejected
+  card.style.display = "none";
+}function showAll() {
+  document.querySelectorAll(".question-card").forEach(card => {
+    if (card.dataset.role === "community") {
+      card.style.display = "flex";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+
+
+
+</script>
+<script>
+function setActive(clickedBtn) {
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.classList.remove("active");
+  });
+  clickedBtn.classList.add("active");
+}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+
+}           
+/* ================= TOP NAV ================= */
+.top-nav{
+    background:#2c2a99;
+    color:white;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo i{ cursor:pointer; }
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-size:14px;
+}
+
+/* ================= LAYOUT ================= */
+.layout{
+    display:grid;
+    grid-template-columns:0px 1fr;
+    transition:grid-template-columns 0.35s ease;
+}
+
+/* WHEN SIDEBAR OPEN */
+.layout.show{
+    grid-template-columns:220px 1fr;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    background:lightgrey;
+    min-height:calc(100vh - 60px);
+    border-right:1px solid #ddd;
+    overflow:hidden;
+    transition:0.35s ease;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding-top:10px;
+}
+
+.sidebar li{
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.sidebar li:hover{
+    background:#e5efff;
+    color:#2563eb;
+}
+
+.sidebar i{
+    min-width:22px;
+}
+
+/* ACTIVE ITEM */
+.sidebar li.active{
+    background:#e5efff;
+    color:#2563eb;
+    border-left:4px solid #2563eb;
+}
+
+/* ================= MAIN CONTENT ================= */
+.container{
+    padding:20px;
+}
+
+.title{
+    margin-bottom:25px;
+}
+
+.title h2{
+    font-size:28px;
+    color:#1f2937;
+    margin-bottom:5px;
+}
+
+.title p{
+    color:#6b7280;
+    font-size:14px;
+}
+
+/* ================= CARDS ================= */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.card{
+    padding:20px;
+    border-radius:8px;
+    color:white;
+    box-shadow:0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card p{
+    font-size:14px;
+    margin-bottom:10px;
+    opacity:0.9;
+}
+
+.card h3{
+    font-size:28px;
+    font-weight:bold;
+}
+
+.card{
+    cursor:pointer;
+    transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-6px) scale(1.02);
+    box-shadow:0 12px 25px rgba(0,0,0,0.15);
+}
+
+.card:active{
+    transform:scale(0.98);
+}
+.card.blue{
+    background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.card.green{
+    background:linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.card.purple{
+    background:linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.card.orange{
+    background:linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+/* ================= FILTERS ================= */
+.filters{
+    background:white;
+    padding:15px;
+    border-radius:8px;
+    margin-bottom:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    flex-wrap:wrap;
+    box-shadow:0 1px 3px rgba(0,0,0,0.1);
+}
+
+#search{
+    flex:1;
+    min-width:250px;
+    padding:10px 15px;
+    border:1px solid #e5e7eb;
+    border-radius:6px;
+    font-size:14px;
+}
+
+#search:focus{
+    outline:none;
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.tabs{
+    display:flex;
+    gap:10px;
+}
+
+.tabs button{
+    padding:8px 16px;
+    border:1px solid #e5e7eb;
+    background:white;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.25s;
+}
+
+.tabs button:hover{
+    border-color:#2563eb;
+    color:#2563eb;
+}
+
+.tabs button.active{
+    background-color: #2c2a99;
+    color:whitesmoke;
+}
+
+/* ================= TABLE ================= */
+.table-wrapper{
+    background:white;
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 1px 3px rgba(0,0,0,0.1);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#f3f4f6;
+    border-bottom:2px solid #e5e7eb;
+}
+
+th{
+    padding:15px;
+    text-align:left;
+    font-weight:600;
+    color:#374151;
+    font-size:14px;
+}
+
+td{
+    padding:15px;
+    border-bottom:1px solid #e5e7eb;
+    color:#4b5563;
+    font-size:14px;
+}
+
+tbody tr:hover{
+    background:#f9fafb;
+}
+
+tbody tr:last-child td{
+    border-bottom:none;
+}
+
+strong{
+    color:#1f2937;
+}
+
+small{
+    color:#6b7280;
+    display:block;
+    margin-top:3px;
+}
+
+/* ================= STATUS BADGES ================= */
+.status{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:500;
+}
+
+.active-status{
+    background:#d1fae5;
+    color:#065f46;
+}
+
+.pending-status{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.suspended-status{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+/* ================= ACTIONS ================= */
+.actions{
+    font-size:16px;
+    letter-spacing:4px;
+    cursor:pointer;
+}
+
+.actions:hover{
+    opacity:0.7;
+}
+
+/* ================= FOOTER ================= */
+
+
+        .foot{
+     background-color: #2c2a99;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 16px;
+        }
+
+        /* CONTENT */
+        .container {
+            flex: 1;
+            padding: 24px;
+        }
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .layout.show{
+        grid-template-columns:60px 1fr;
+    }
+
+    .sidebar span{
+        display:none;
+    }
+}
+
+a{
+    text-decoration:none;
+    color:black;
+}
+        /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  /* TOP NAV */
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  /* SIDEBAR */
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  /* MAIN CONTENT */
+  .container {
+    padding: 12px;
+  }
+
+  /* TITLE */
+  .title h2 {
+    font-size: 22px;
+  }
+
+  .title p {
+    font-size: 13px;
+  }
+  .card{
+    flex-direction:column;
+    text-align:center;
+  }
+
+
+  /* FILTERS */
+  .filters {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+
+  }
+  .tabs button {
+    flex: 1;
+    min-width: 80px;
+    padding: 6px 12px;
+    font-size: 12px;
+    display: flex;
+  }
+
+  /* TABLE */
+  .table-wrapper {
+    overflow: hidden;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  th, td {
+    padding: 10px 8px;
+  }
+
+  .card.blue, .card.green, .card.purple, .card.orange {
+    padding: 12px;
+  }
+
+  small {
+    font-size: 11px;
+  }
+
+  .status {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .actions {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  #search {
+    font-size: 12px;
+    padding: 8px 12px;
+    width: 100%;
+    display:flex;
+  }
+
+  .tabs button {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  /* TABLE */
+  th, td {
+    padding: 8px 6px;
+    display: grid;
+  }
+
+  /* CARDS text */
+  .card h3 {
+    font-size: 18px;
+  }
+
+  .card p {
+    font-size: 11px;
+  }
+
+  small {
+    font-size: 11px;
+  }
+
+  .status {
+    padding: 4px 8px;
+    font-size: 11px;
+  }
+
+  .actions {
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+}
+
+
+
+
+</style>
+</head>
+<body>
+    
+    <!-- ================= TOP NAV ================= -->
+<header class="top-nav">
+    <div class="logo">
+        <i class="fa-solid fa-bars" onclick="side()"></i>
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Student Club</span>
+    </div>
+
+    <div class="nav-actions">
+        <a href="notification.html" style="color:white">
+            <i class="fa-regular fa-bell"></i>
+        </a>
+
+        <a href="studentprofile.html" style="color:white">
+            <i class="fa-solid fa-user"></i>
+            <span>Humera</span>
+        </a>
+
+        <!-- LOGOUT ICON  -->
+         <i class="fa-solid fa-right-from-bracket" onclick="logout()" style="cursor:pointer;"></i>
+    </div>
+</header>
+
+<div class="layout" id="layout">
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar">
+<ul>
+    <li ><a href="admindashboard.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+    <li class="active"><a href="manage.html"><i class="fa-solid fa-users"></i><span>Manage Users</span></a></li>
+    <li ><a href="content.html"><i class="fa-solid fa-file"></i><span>Content</span></a></li>
+     <li ><a href="controlpanel.html"><i class="fa-solid fa-gamepad"></i><span>Control Panel</span></a></li>
+    <li><a href="analytics.html"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></a></li>
+    <li><a href="reports.html"><i class="fa-solid fa-flag"></i><span>Reports</span></a></li>
+    <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+</ul>
+</aside>
+
+<div class="container">
+
+
+  <section class="title">
+    <h1>Manage Users</h1>
+    <p>Approve, manage, and moderate platform users</p>
+  </section>
+
+  <!-- Stats Cards -->
+  <section class="cards">
+    <div class="card blue">
+      <p>Total Users</p>
+      <h3>12,458</h3>
+    </div>
+    <div class="card green">
+      <p>Students</p>
+      <h3>11,234</h3>
+    </div>
+    <div class="card purple">
+      <p>Teachers</p>
+      <h3>1,224</h3>
+    </div>
+    <div class="card orange">
+      <p>Pending Approval</p>
+      <h3>23</h3>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="filters">
+    <input type="text" id="search" placeholder="Search users by name or email..." />
+    <div class="tabs">
+      <button class="active" onclick="filterUsers('all')">All</button>
+      <button onclick="filterUsers('student')">Students</button>
+      <button onclick="filterUsers('teacher')">Teachers</button>
+      <button onclick="filterUsers('pending')">Pending</button>
+    </div>
+  </section>
+
+  <!-- Table -->
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Joined</th>
+          <th>Courses</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="userTable">
+        <!-- JS inserts rows -->
+      </tbody>
+    </table>
+  </div>
+
+</div>
+</div>
+
+    <footer class="foot">@ 2026 Student Club All rights reserved</footer>
+
+
+
+<script>
+function side(){
+    document.getElementById("layout").classList.toggle("show");
+}
+
+
+function logout() {
+    window.location.href = "../login.html";
+}
+const users = [
+  {
+    name: "Alice Johnson",
+    email: "alice@example.com",
+    role: "student",
+    status: "active",
+    joined: "2025-12-15",
+    courses: 5
+  },
+  {
+    name: "Sarah Johnson",
+    email: "sarah@example.com",
+    role: "teacher",
+    status: "active",
+    joined: "2025-11-01",
+    courses: 8
+  },
+  {
+    name: "Michael Chen",
+    email: "michael@example.com",
+    role: "teacher",
+    status: "pending",
+    joined: "2026-01-02",
+    courses: 0
+  },
+  {
+    name: "Bob Smith",
+    email: "bob@example.com",
+    role: "student",
+    status: "active",
+    joined: "2025-12-20",
+    courses: 3
+  },
+  {
+    name: "Emma Wilson",
+    email: "emma@example.com",
+    role: "student",
+    status: "suspended",
+    joined: "2025-10-15",
+    courses: 2
+  }
+];
+
+function renderUsers(filter = "all") {
+  const table = document.getElementById("userTable");
+  table.innerHTML = "";
+
+  users
+    .filter(u => filter === "all" || u.role === filter || u.status === filter)
+    .forEach(user => {
+      table.innerHTML += `
+        <tr>
+          <td>
+            <strong>${user.name}</strong><br>
+            <small>${user.email}</small>
+          </td>
+          <td>${capitalize(user.role)}</td>
+          <td>
+            <span class="status ${user.status}-status">
+              ${capitalize(user.status)}
+            </span>
+          </td>
+          <td>${user.joined}</td>
+          <td>${user.courses}</td>
+          <td class="actions">
+            👁️ ✏️ 🗑️
+          </td>
+        </tr>
+      `;
+    });
+}
+
+function filterUsers(type) {
+  document.querySelectorAll(".tabs button").forEach(btn => btn.classList.remove("active"));
+  event.target.classList.add("active");
+  renderUsers(type);
+}
+
+function capitalize(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+renderUsers();
+</script>
+
+
+
+</body>
+</html>
+

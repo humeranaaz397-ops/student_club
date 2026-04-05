@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+body{
+    background-color:  #f5f7fb;
+}           
+/* ================= TOP NAV ================= */
+.top-nav{
+    background:#2c2a99;
+    color:white;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo i{ cursor:pointer; }
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-size:14px;
+}
+
+/* ================= LAYOUT ================= */
+.layout{
+    display:grid;
+    grid-template-columns:0px 1fr;
+    transition:grid-template-columns 0.35s ease;
+}
+
+/* WHEN SIDEBAR OPEN */
+.layout.show{
+    grid-template-columns:220px 1fr;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    background:lightgrey;
+    min-height:calc(100vh - 60px);
+    border-right:1px solid #ddd;
+    overflow:hidden;
+    transition:0.35s ease;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding-top:10px;
+}
+
+.sidebar li{
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.sidebar li:hover{
+    background:#e5efff;
+    color:#2563eb;
+}
+
+.sidebar i{
+    min-width:22px;
+}
+
+/* ACTIVE ITEM */
+.sidebar li.active{
+    background:#e5efff;
+    color:#2563eb;
+    border-left:4px solid #2563eb;
+}
+/* ================= FOOTER ================= */
+
+
+        .foot{
+     background-color: #2c2a99;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 16px;
+        }
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .layout.show{
+        grid-template-columns:60px 1fr;
+    }
+
+    .sidebar span{
+        display:none;
+    }
+}
+
+a{
+    text-decoration:none;
+    color:black;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f4ff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.hero-text {
+    max-width: 60%;
+}
+.hero-text h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}   
+.hero-sub {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555;
+}   
+.hero-actions {
+    display: flex;
+    gap: 10px;
+}
+.hero-actions input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+.hero-actions .ask-btn.small {
+    padding: 10px 16px;
+    font-size: 14px;
+}
+.hero-image img {
+    max-width: 200px;
+    border-radius: 10px;
+}
+        /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  /* TOP NAV */
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  /* SIDEBAR */
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  /* MAIN CONTENT */
+  .main-content {
+    padding: 12px;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions input {
+    width: 100%;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+
+.ask-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+}
+.ask-btn:hover {
+    background-color:  #2c2a99;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.profile-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.avatar-lg {
+  width: 80px;
+  height: 80px;
+  background: goldenrod;
+  color: #fff;
+  font-size: 32px;
+  border-radius: 50%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.role {
+  color: gray;
+}
+
+.rating {
+  margin: 8px 0;
+}
+
+.badge {
+  display: inline-block;
+  background: #e0f3ff;
+  color: #007bff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.btn-primary {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.content .box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.courses {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.course-card {
+  background: #f8f9ff;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.review {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.avatar-sm {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pink { background: #ff6b81; }
+.blue { background: #1e90ff; }
+.green { background: #2ed573; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content label {
+  font-size: 14px;
+  margin-top: 10px;
+  display: block;
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.cancel-btn {
+  background: #ccc;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background: #0d6efd;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#listContent {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+#listContent li {
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+
+
+</style>
+</head>
+<body>
+    
+    <!-- ================= TOP NAV ================= -->
+<header class="top-nav">
+    <div class="logo">
+        <i class="fa-solid fa-bars" onclick="side()"></i>
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Student Club</span>
+    </div>
+
+    <div class="nav-actions">
+        <a href="notification(t).html" style="color:white">
+            <i class="fa-regular fa-bell"></i>
+        </a>
+
+        <a href="teacherprofile.html" style="color:white">
+            <i class="fa-solid fa-user"></i>
+            <span>Aditya</span>
+        </a>
+
+        <!-- LOGOUT ICON (UNCHANGED) -->
+         <i class="fa-solid fa-right-from-bracket" onclick="logout()" style="cursor:pointer;"></i>
+    </div>
+</header>
+
+<div class="layout" id="layout">
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar">
+    <ul>
+        <li><a href="teacherdashboard.html"><i class="fa-solid fa-grip"></i><span> Dashboard</span></a></li>
+                <li><a href="uploadpdf.html"><i class="fa-solid fa-upload"></i> <span>Upload Material</span></a></li>
+                <li><a href="uploadvideo.html"><i class="fa-solid fa-video"></i> <span>Upload Video</span></a></li>
+                <li><a href="quiz.html"><i class="fa-solid fa-clipboard-list"></i> <span>Create Quiz</span></a></li>
+                <li><a href="teacher live classes.html"><i class="fa-solid fa-wifi"></i> <span>Live Classes</span></a></li>
+                <li><a href="answer_q&a.html"><i class="fa-solid fa-circle-question"></i> <span>Answer Q&A</span></a></li>
+                <li><a href="post_notification.html"><i class="fa-regular fa-bell"></i> <span>Post Notification</span></a></li>
+                <li><a href="chat(T).html"><i class="fa-regular fa-comment"></i><span> Chat</span></a></li>
+                <li><a href="findpeople(T).html"><i class="fa-solid fa-users"></i> <span>Find People</span></a></li>
+          
+         </ul>
+</aside>
+
+        <main class="content">
+           <div class="hero">
+      <div class="hero-text">
+        <h1>Ignite Minds, Inspire Futures! ✨</h1>
+        <p class="hero-sub">Building the Future, One Mind at a Time. You aren't just teaching a class; you're shaping history. Let's go!.</p>
+        <div class="hero-actions">
+          <input id="searchInput" type="text" placeholder="Search questions, tags or topics..." />
+          <button id="searchBtn" class="ask-btn small">Search</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://i.postimg.cc/HkxjkcNB/file-0000000017307208ab9cbd047c7bd9be.png" alt="Students studying together">
+      </div>
+    </div>
+    
+   
+<div class="container">
+
+  <!-- LEFT PROFILE -->
+  <aside class="profile-card">
+    <div class="avatar-lg">A</div>
+    <h3>Aditya</h3>
+    <p class="role">Teacher</p>
+    <p class="rating">⭐ 4.8 (245 reviews)</p>
+    <p class="email">📧 Aditya22@gmail.com</p><br>
+    <span class="badge">Expert Instructor</span>
+    <button class="btn-primary" onclick="openEdit()">✏ Edit Profile</button>
+<br><br>
+    <p class="hint">Complete your profile to attract more students</p>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+
+    <!-- STATS -->
+    <section class="stats">
+     <div class="stat-box" onclick="showData('students')">
+        <i class="fa fa-users"></i>
+        <h4>1,250</h4>
+        <p>Total Students</p>
+      </div>
+      <div class="stat-box" onclick="showData('courses')">
+        <i class="fa fa-book"></i>
+        <h4>12</h4>
+        <p>Courses</p>
+      </div>
+      <div class="stat-box" onclick="showData('videos')">
+        <i class="fa fa-video"></i>
+        <h4>87</h4>
+        <p>Videos</p>
+      </div>
+      <div class="stat-box">
+        <i class="fa fa-star"></i>
+        <h4>4.8</h4>
+        <p>Rating</p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="box">
+      <h3>About Me</h3>
+      <p>
+        Full-stack developer with 10+ years of experience in web development.
+        Passionate about teaching modern web technologies including React,
+        Node.js, and cloud computing. I believe in hands-on learning and
+        real-world projects.
+      </p>
+    </section>
+
+    <!-- COURSES -->
+    <section class="box">
+      <h3>My Courses</h3>
+      <div class="courses">
+        <div class="course-card">
+          <h4>Web Development Fundamentals</h4>
+          <p>👥 450 students</p>
+          <span>⭐ 4.9</span>
+        </div>
+        <div class="course-card">
+          <h4>React Advanced Patterns</h4>
+          <p>👥 320 students</p>
+          <span>⭐ 4.8</span>
+        </div>
+        <div class="course-card">
+          <h4>JavaScript ES6 Mastery</h4>
+          <p>👥 280 students</p>
+          <span>⭐ 4.7</span>
+        </div>
+        <div class="course-card">
+          <h4>Database Design</h4>
+          <p>👥 200 students</p>
+          <span>⭐ 4.9</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="box">
+      <h3>Recent Reviews</h3>
+
+      <div class="review">
+        <div class="avatar-sm pink">AJ</div>
+        <div>
+          <strong>Alice Johnson</strong>
+          <small>React Advanced Patterns</small>
+          <p>Excellent teacher! Very clear explanations.</p>
+        </div>
+        <span>⭐⭐⭐⭐⭐</span>
+      </div>
+
+      <div class="review">
+        <div class="avatar-sm blue">BS</div>
+        <div>
+          <strong>Bob Smith</strong>
+          <small>Web Development Fundamentals</small>
+          <p>Best web development course I have taken!</p>
+        </div>
+        <span>⭐⭐⭐⭐⭐</span>
+      </div>
+
+      <div class="review">
+        <div class="avatar-sm green">CW</div>
+        <div>
+          <strong>Carol White</strong>
+          <small>JavaScript ES6</small>
+          <p>Great content, would love more examples.</p>
+        </div>
+        <span>⭐⭐⭐⭐</span>
+      </div>
+    </section>
+<!-- EDIT PROFILE MODAL -->
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <h2>Edit Profile</h2>
+
+    <label>Name</label>
+    <input type="text" value="Aditya">
+
+    <label>Email</label>
+    <input type="email" value="Aditya22@gmail.com">
+
+    <label>Role</label>
+    <input type="text" value="Teacher">
+
+    <label>About Me</label>
+    <textarea rows="4">Full-stack developer with 10+ years of experience.</textarea>
+
+    <div class="modal-actions">
+      <button onclick="closeEdit()" class="cancel-btn">Cancel</button>
+      <button class="save-btn">Save</button>
+    </div>
+  </div>
+</div>
+<div id="listModal" class="modal">
+  <div class="modal-content">
+    <h2 id="listTitle"></h2>
+    <ul id="listContent"></ul>
+
+    <div class="modal-actions">
+      <button onclick="closeList()" class="cancel-btn">Close</button>
+    </div>
+  </div>
+</div>
+
+  </main>
+</div>
+    <footer class="foot">@ 2026 Student Club All rights reserved</footer>
+
+</main>
+<script>
+function side(){
+    document.getElementById("layout").classList.toggle("show");
+}
+
+
+function logout() {
+    window.location.href = "../login.html";
+}
+const typeButtons = document.querySelectorAll(".type");
+
+typeButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    typeButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+  });
+});
+function openEdit() {
+  document.getElementById("editModal").style.display = "flex";
+}
+
+function closeEdit() {
+  document.getElementById("editModal").style.display = "none";
+}
+
+/* ===== DEFAULT DATA ===== */
+const studentsData = [
+  "Alice Johnson",
+  "Bob Smith",
+  "Carol White",
+  "David Miller",
+  "Emma Brown"
+];
+
+const coursesData = [
+  "Web Development Fundamentals",
+  "React Advanced Patterns",
+  "JavaScript ES6 Mastery",
+  "Database Design"
+];
+
+const videosData = [
+  "HTML Basics",
+  "CSS Flexbox",
+  "JavaScript DOM",
+  "React Hooks",
+  "Node.js Introduction"
+];
+function showData(type) {
+  const title = document.getElementById("listTitle");
+  const list = document.getElementById("listContent");
+
+  list.innerHTML = ""; // clear old items
+
+  let data = [];
+
+  if (type === "students") {
+    title.innerText = "Total Students";
+    data = studentsData;
+  }
+
+  if (type === "courses") {
+    title.innerText = "Courses";
+    data = coursesData;
+  }
+
+  if (type === "videos") {
+    title.innerText = "Videos";
+    data = videosData;
+  }
+
+  data.forEach(item => {
+    list.innerHTML += `<li>${item}</li>`;
+  });
+
+  document.getElementById("listModal").style.display = "flex";
+}
+function closeList() {
+  document.getElementById("listModal").style.display = "none";
+}
+
+
+</script>
+
+
+</body>
+</html>
+

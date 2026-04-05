@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Upload Course Videos</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+  margin: 0;
+}
+
+.container {
+  width: 95%;
+  max-width: 1100px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h2 {
+  color: #1e40af;
+  margin-bottom: 15px;
+}
+
+/* Upload box */
+.upload-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.upload-box input,
+.upload-box select,
+.upload-box button {
+  padding: 10px;
+  font-size: 14px;
+  flex: 1;
+  min-width: 150px;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+/* Table */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  font-size: 14px;
+}
+
+.actions button {
+  margin: 2px;
+  padding: 6px 10px;
+}
+
+/* Mobile tweaks */
+@media (max-width: 600px) {
+  h2 {
+    font-size: 18px;
+  }
+
+  th, td {
+    font-size: 12px;
+  }
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+           
+/* ================= TOP NAV ================= */
+.top-nav{
+    background:#2c2a99;
+    color:white;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo i{ cursor:pointer; }
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-size:14px;
+}
+
+/* ================= LAYOUT ================= */
+.layout{
+    display:grid;
+    grid-template-columns:0px 1fr;
+    transition:grid-template-columns 0.35s ease;
+}
+
+/* WHEN SIDEBAR OPEN */
+.layout.show{
+    grid-template-columns:220px 1fr;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    background:lightgrey;
+    min-height:calc(100vh - 60px);
+    border-right:1px solid #ddd;
+    overflow:hidden;
+    transition:0.35s ease;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding-top:10px;
+}
+
+.sidebar li{
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.sidebar li:hover{
+    background:#e5efff;
+    color:#2563eb;
+}
+
+.sidebar i{
+    min-width:22px;
+}
+
+/* ACTIVE ITEM */
+.sidebar li.active{
+    background:#e5efff;
+    color:#2563eb;
+    border-left:4px solid #2563eb;
+}
+/* ================= FOOTER ================= */
+
+
+        .foot{
+     background-color: #2c2a99;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 16px;
+        }
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .layout.show{
+        grid-template-columns:60px 1fr;
+    }
+
+    .sidebar span{
+        display:none;
+    }
+}
+
+a{
+    text-decoration:none;
+    color:black;
+}
+
+        /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  /* TOP NAV */
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  /* SIDEBAR */
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  /* MAIN CONTENT */
+  .main-content {
+    padding: 12px;
+  }
+}
+/* ===== MOBILE FIXES ===== */
+@media (max-width: 600px) {
+
+  /* Upload box stack */
+  .upload-box {
+    flex-direction: column;
+  }
+
+  .upload-box input,
+  .upload-box select,
+  .upload-box button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  /* Reduce container padding */
+  .container {
+    padding: 14px;
+  }
+
+  h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+}
+@media (max-width: 600px) {
+
+  table {
+    min-width: 600px; /* enables smooth horizontal scroll */
+  }
+
+  th, td {
+    padding: 8px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .actions button {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+    <!-- ================= TOP NAV ================= -->
+<header class="top-nav">
+    <div class="logo">
+        <i class="fa-solid fa-bars" onclick="side()"></i>
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Student Club</span>
+    </div>
+
+    <div class="nav-actions">
+        <a href="notification.html" style="color:white">
+            <i class="fa-regular fa-bell"></i>
+        </a>
+
+        <a href="adminprofile.html" style="color:white">
+            <i class="fa-solid fa-user"></i>
+            <span>Humera</span>
+        </a>
+
+        <!-- LOGOUT ICON (UNCHANGED) -->
+         <i class="fa-solid fa-right-from-bracket" onclick="logout()" style="cursor:pointer;"></i>
+    </div>
+</header>
+
+<div class="layout" id="layout">
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar">
+    <ul>
+        
+    <li ><a href="admindashboared.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+    <li><a href="manage.html"><i class="fa-solid fa-users"></i><span>Manage Users</span></a></li>
+    <li class="active"><a href="controlpanel.html"><i class="fa-solid fa-gamepad"></i><span>Control Panel</span></a></li>
+    <li ><a href="content.html"><i class="fa-solid fa-file"></i><span>Content</span></a></li>
+    <li><a href="analytics.html"><i class="fa-solid fa-chart-line"></i><span>Analytics</span></a></li>
+    <li><a href="reports.html"><i class="fa-solid fa-flag"></i><span>Reports</span></a></li>
+    <li><a href="settings.html"><i class="fa-solid fa-gear"></i><span>Settings</span></a></li>
+  
+         </ul>
+</aside>
+
+        <main class="content">
+    
+<div class="container">
+  <h2>📚 Upload Course Videos</h2>
+
+  <div class="upload-box">
+    <select id="course">
+      <option value="">Select Course</option>
+      <option>Web Development</option>
+      <option>Python Programming</option>
+      <option>Data Science</option>
+      <option>Mobile App Development</option>
+      <option>UI / UX Design</option>
+    </select>
+
+    <input type="text" id="title" placeholder="Video Title">
+    <input type="file" id="video" accept="video/*" multiple>
+    <button onclick="uploadVideo()">Upload</button>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Video</th>
+          <th>Course</th>
+          <th>Size</th>
+          <th>Date</th>
+          <th>Plays</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="videoList"></tbody>
+    </table>
+  </div>
+</div>
+
+    <footer class="foot">@ 2026 Student Club All rights reseved</footer>
+
+
+<script>
+function side(){
+    document.getElementById("layout").classList.toggle("show");
+}
+
+
+function logout() {
+    window.location.href = "../login.html";
+}
+</script>
+
+<script>
+
+function uploadVideo() {
+  let course = document.getElementById("course").value;
+  let title = document.getElementById("title").value;
+  let files = document.getElementById("video").files;
+
+  if (!course || !title || files.length === 0) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  Array.from(files).forEach(file => {
+    let row = document.createElement("tr");
+    let size = (file.size / (1024 * 1024)).toFixed(1) + " MB";
+    let date = new Date().toISOString().split("T")[0];
+
+    row.innerHTML = `
+      <td>${title}</td>
+      <td>${course}</td>
+      <td>${size}</td>
+      <td>${date}</td>
+      <td class="plays">0</td><td class="actions">
+  <button onclick="playVideo(this)">▶</button>
+  <button onclick="editVideo(this)">✏️</button>
+  <button onclick="deleteVideo(this)">🗑</button>
+</td>
+
+    `;
+    videoList.appendChild(row);
+  });
+
+  document.getElementById("title").value = "";
+  document.getElementById("video").value = "";
+}
+
+function playVideo(btn) {
+  let playsCell = btn.closest("tr").querySelector(".plays");
+  playsCell.innerText = parseInt(playsCell.innerText) + 1;
+}
+
+function deleteVideo(btn) {
+  btn.closest("tr").remove();
+}
+let videoList = document.getElementById("videoList");
+
+/* SAMPLE COURSE VIDEOS */
+const sampleVideos = [
+  { title: "HTML Basics", course: "Web Development", size: "120 MB", plays: 5 },
+  { title: "CSS Flexbox", course: "Web Development", size: "95 MB", plays: 3 },
+  { title: "JavaScript DOM", course: "Web Development", size: "150 MB", plays: 7 },
+
+  { title: "Python Introduction", course: "Python Programming", size: "110 MB", plays: 4 },
+  { title: "Python Loops", course: "Python Programming", size: "90 MB", plays: 6 },
+
+  { title: "Data Analysis with Pandas", course: "Data Science", size: "200 MB", plays: 2 },
+  { title: "Machine Learning Basics", course: "Data Science", size: "250 MB", plays: 1 }
+];
+
+/* LOAD SAMPLE VIDEOS */
+sampleVideos.forEach(video => {
+  let row = document.createElement("tr");
+  let date = new Date().toISOString().split("T")[0];
+
+  row.innerHTML = `
+    <td>${video.title}</td>
+    <td>${video.course}</td>
+    <td>${video.size}</td>
+    <td>${date}</td>
+    <td class="plays">${video.plays}</td><td class="actions">
+  <button onclick="playVideo(this)">▶</button>
+  <button onclick="editVideo(this)">✏️</button>
+  <button onclick="deleteVideo(this)">🗑</button>
+</td>
+
+  `;
+
+  videoList.appendChild(row);
+});
+
+function editVideo(btn) {
+  let row = btn.closest("tr");
+  let titleCell = row.cells[0];
+  let courseCell = row.cells[1];
+
+  // Prompt the user for new title and course
+  let newTitle = prompt("Edit Video Title:", titleCell.innerText);
+  if (newTitle !== null && newTitle.trim() !== "") {
+    titleCell.innerText = newTitle.trim();
+  }
+
+  let newCourse = prompt("Edit Course Name:", courseCell.innerText);
+  if (newCourse !== null && newCourse.trim() !== "") {
+    courseCell.innerText = newCourse.trim();
+  }
+}
+
+</script>
+
+</body>
+</html>

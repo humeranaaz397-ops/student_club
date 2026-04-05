@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Club</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+/* ================= TOP NAV ================= */
+.top-nav{
+    background:#2c2a99;
+    color:white;
+    padding:14px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.logo i{ cursor:pointer; }
+
+.nav-actions{
+    display:flex;
+    gap:15px;
+    align-items:center;
+    font-size:14px;
+}
+
+/* ================= LAYOUT ================= */
+.layout{
+    display:grid;
+    grid-template-columns:0px 1fr;
+    transition:grid-template-columns 0.35s ease;
+}
+
+/* WHEN SIDEBAR OPEN */
+.layout.show{
+    grid-template-columns:220px 1fr;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    background:lightgrey;
+    min-height:calc(100vh - 60px);
+    border-right:1px solid #ddd;
+    overflow:hidden;
+    transition:0.35s ease;
+}
+
+.sidebar ul{
+    list-style:none;
+    padding-top:10px;
+}
+
+.sidebar li{
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:0.25s;
+}
+
+.sidebar li:hover{
+    background:#e5efff;
+    color:#2563eb;
+}
+
+.sidebar i{
+    min-width:22px;
+}
+
+/* ACTIVE ITEM */
+.sidebar li.active{
+    background:#e5efff;
+    color:#2563eb;
+    border-left:4px solid #2563eb;
+}
+/* ================= FOOTER ================= */
+ .foot{
+     background-color: #2c2a99;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            font-size: 16px;
+        }
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .layout.show{
+        grid-template-columns:60px 1fr;
+    }
+
+    .sidebar span{
+        display:none;
+    }
+}
+
+a{
+    text-decoration:none;
+    color:black;
+}
+
+  
+
+/* ================= MAIN CONTENT ================= */
+.content{
+    flex:1;
+    padding:20px;
+}
+
+/* ================= PAGE HEADINGS ================= */
+.content h1{
+    margin:20px 0;
+    font-size:32px;
+    color:#333;
+}
+
+.content p{
+    margin-bottom:20px;
+    font-size:16px;
+    color:#555;
+}
+
+/* ================= CARDS ================= */
+.card{
+    background:#ffe5ec;
+    padding:20px;
+    border-radius:10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    transition: all 0.3s ease;
+    margin-bottom:20px;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.card h2{
+    font-size:20px;
+    margin-bottom:10px;
+    color:#333;
+}
+
+.card p{
+    font-size:14px;
+    color:#555;
+    margin-bottom:10px;
+}
+
+.card button{
+    padding:8px 14px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    color:white;
+}
+
+.card .live-btn{
+    background:#4361ee;
+}
+
+.card .join-btn{
+    background:#2563eb;
+}
+
+/* ================= PENDING/UPCOMING ================= */
+.pending, .pending1{
+    margin-top:30px;
+    padding:20px;
+    border-radius:10px;
+    background:#f0f4ff;
+}
+
+.pending-item, .pending-item1, .pending-item2{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+    margin:10px 0;
+    box-shadow:0 5px 10px rgba(0,0,0,0.1);
+}
+
+.item-matter, .item-matter2{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.item-matter h4, .item-matter2 h4{
+    font-size:18px;
+    color:#333;
+}
+
+.item-matter p, .item-matter2 p{
+    font-size:14px;
+    color:#555;
+    line-height:1.5;
+}
+
+.pending-item button,button{
+    margin-top:10px;
+    padding:8px 14px;
+    border-radius:20px;
+    border:2px solid #4361ee;
+    background:#4361ee;
+    color:whitesmoke;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.pending-item button:hover{
+    background:#2c2a99;
+    color:white;
+}
+
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f4ff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.hero-text {
+    max-width: 60%;
+}
+.hero-text h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}   
+.hero-sub {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555;
+}   
+.hero-actions {
+    display: flex;
+    gap: 10px;
+}
+.hero-actions input {
+    flex: 1;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+.hero-actions .ask-btn.small {
+    padding: 10px 16px;
+    font-size: 14px;
+}
+.hero-image img {
+    max-width: 200px;
+    border-radius: 10px;
+}
+ button:hover {
+    background-color: #1e40af;
+}
+
+
+       /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  /* TOP NAV */
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  /* SIDEBAR */
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  /* MAIN CONTENT */
+  .main-content {
+    padding: 12px;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions input {
+    width: 100%;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+}
+.join-btn:hover {
+    background-color: #1e40af;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= TOP NAV ================= -->
+<header class="top-nav">
+    <div class="logo">
+        <i class="fa-solid fa-bars" onclick="side()"></i>
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>Student Club</span>
+    </div>
+
+    <div class="nav-actions">
+        <a href="notification(s).html" style="color:white">
+            <i class="fa-regular fa-bell"></i>
+        </a>
+
+        <a href="studentprofile.html" style="color:white">
+            <i class="fa-solid fa-user"></i>
+            <span>Sudharshan</span>
+        </a>
+
+        <!-- LOGOUT ICON  -->
+          <i class="fa-solid fa-right-from-bracket" onclick="logout()" style="cursor:pointer;"></i>
+
+ 
+    </div>
+</header>
+
+<div class="layout" id="layout">
+
+<!-- ================= SIDEBAR ================= -->
+<aside class="sidebar">
+    <ul>
+        
+        <li ><a href="studentdashboard.html"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
+        <li><a href="q&a(s).html"><i class="fa-solid fa-clipboard-question"></i><span>Q&A</span></a></li>
+        <li><a href="studymaterial(s).html"><i class="fa-solid fa-file-lines"></i><span>Study Materials</span></a></li>
+        <li><a href="video(s).html"><i class="fa-solid fa-video"></i><span>Video Learning</span></a></li>
+        <li class="active"><a href="liveclasses(s).html"><i class="fa-brands fa-youtube"></i><span>Live Classes</span></a></li>
+        <li><a href="course.html"><i class="fa-solid fa-book-open"></i><span>Courses</span></a></li>
+        <li><a href="findpeople(s).html"><i class="fa-solid fa-users"></i><span>Find People</span></a></li>
+        <li><a href="chat(s).html"><i class="fa-solid fa-comment-dots"></i><span>Chat</span></a></li>
+        <li><a href="learningprogress(s).html"><i class="fa-solid fa-arrow-trend-up"></i><span>Progress</span></a></li>
+        
+
+    </ul>
+</aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div class="content">
+        <div class="hero">
+      <div class="hero-text">
+        <h1>Learn it live.Use it now! ✨</h1>
+        <p class="hero-sub">live classes Connect minds, ideas, and real-time Understanding.</p>
+        <div class="hero-actions">
+          <input id="searchInput" type="text" placeholder="Search questions, tags or topics..." />
+          <button id="searchBtn" class="ask-btn small">Search</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="https://i.postimg.cc/7ZvXG04G/1768419227023.png" alt="Students studying together">
+      </div>
+    </div>
+    
+        <h1>Live Classroom</h1>
+        <p>Join live classes and interact with teachers</p>
+
+        <div class="cards">
+            <div class="card">
+                <div>
+                    <h2>Introduction to Machine Learning</h2>
+                    <p>🧑‍🏫 DR.HumeraNaaz 👥156 participants ⌚Started 15 min ago</p>
+                    <button class="live-btn">⭕Live</button>
+                    <b>Ends in 1h 15 min</b>
+                </div>
+                <button class="join-btn"><a href="https://meet.google.com/ext-pkxr-mfu" style="color: whitesmoke;">Join Now</a></button>
+            </div>
+        </div>
+
+        <div class="pending">
+            <h3>Upcoming Classes</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:20px;">
+                <div class="pending-item">
+                    <div class="item-matter2">
+                        <div>
+                            <h4>Advanced React Patterns</h4>
+                            Upcoming
+                            <p>👥 HumeraNaaz <br>🗓️ 03/01/2025 <br>🎥 Duration: 90 minutes <br>👥 45 Enrolled</p>
+                            <button onclick="set()">Set Reminder</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pending-item">
+                    <div class="item-matter2">
+                        <div>
+                            <h4>Database Design Principles</h4>
+                            Upcoming
+                            <p>👥 Sai Charan <br>🗓️ 03/01/2025, 16:30 <br>🎥 Duration: 60 minutes <br>👥 32 Enrolled</p>
+                            <button onclick="set()">Set Reminder</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pending1">
+            <h3>Past Class Recordings</h3>
+            <div class="pending-item1">
+                <div class="item-matter">
+                    <div>
+                        <h4>Advanced React Patterns - Session 1</h4>
+                        <p>🧑‍🏫 HumeraNaaz 📅 Dec 30,2025 ⏲️ 1h45min 💬Chat Available</p>
+                    </div>
+                   <a href="../Videos/7 React Lessons I Wish I Knew Earlier - Code Bootcamp (1080p, h264).mp4" target="_blank"><button>Watch Recording</button></a>
+                </div>
+            </div>
+
+            <div class="pending-item2">
+                <div class="item-matter">
+                    <div>
+                        <h4>Database Design Fundamentals</h4>
+                        <p>🧑‍🏫 HumeraNaaz 📅 Dec 30,2025 ⏲️ 1h45min 💬Chat Available</p>
+                    </div>
+                  <a href="../Videos/Every React Concept Explained in 12 Minutes - Code Bootcamp (1080p, h264).mp4" target="_blank"><button>Watch Recording</button></a>
+                </div>
+            </div>
+        </div>
+
+
+<footer class="foot">@ 2026 Student Club All rights reserved</footer>
+
+
+<script>
+function side(){
+    document.getElementById("layout").classList.toggle("show");
+}
+
+function logout() {
+    window.location.href = "../login.html";
+}
+function set(){
+    alert("Reminder set successfully you'll be notified at the schedule time.")
+}
+</script>
+
+</body>
+</html>
+
+
