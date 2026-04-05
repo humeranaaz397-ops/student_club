@@ -277,23 +277,25 @@ function showLogin(){
   if(si) si.classList.add('hide');
   if(li) li.classList.remove('hide');
 }
-function login() {
+
+function login(){
   let email = document.querySelector(".input1").value;
   let password = document.querySelector(".input2").value;
 
-  if (email == "sudharshanjaggula605@gmail.com" && password == "sudha88907") {
-    window.location.href = "./Students/studentdashboard.html";
+  if(email=="sudharshanjaggula605@gmail.com" && password=="sudha889s7"){
+    window.location.href="./Students/studentdashboard.html";
   }
-  else if (email == "aditya22@gmail.com" && password == "aditya22") {
-    window.location.href = "./Teachers/teacherdashboard.html";
+  else if(email=="aditya22@gmail.com" && password=="aditya22"){
+    window.location.href="./Teachers/teacherdashboard.html";
   }
-  else if (email == "humera08@gmail.com" && password == "humera08") {
-    window.location.href = "./Admin/admindashboard.html";
+  else if(email=="humera08@gmail.com" && password=="humera08"){
+    window.location.href="./Admin/admindashboard.html";
   }
-  else {
+  else{
     alert("Invalid credentials");
   }
-}</script>
+}
+</script>
 
 </body>
 </html>
