@@ -399,7 +399,63 @@ button:hover {
 .reject-box button:hover {
   background: #c62828;
 }
+@media (max-width: 768px) {
 
+  /* ===== MY ANSWERS + APPROVED ANSWERS ONLY ===== */
+  .question-card[data-role="my-answers"],
+  .question-card[data-role="approved-answers"] {
+
+    display: flex;
+    flex-direction: column;   /* stack properly */
+    width: 100%;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  /* inner container full width */
+  .question-card[data-role="my-answers"] .question-contener,
+  .question-card[data-role="approved-answers"] .question-contener {
+    width: 100%;
+  }
+
+  /* question text */
+  .question {
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  .question-desc {
+    font-size: 14px;
+  }
+
+  /* answer box full width */
+  .question-card[data-role="my-answers"] .answer-box,
+  .question-card[data-role="approved-answers"] .answer-box {
+    width: 100%;
+  }
+
+  /* code / text wrap */
+  .code,
+  pre {
+    white-space: pre-wrap;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  /* buttons full width */
+  .question-card[data-role="approved-answers"] button,
+  .question-card[data-role="my-answers"] button {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  /* tags responsive */
+  .tag {
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+}
     </style>
 </head>
 <body>
@@ -417,7 +473,7 @@ button:hover {
             <i class="fa-regular fa-bell"></i>
         </a>
 
-        <a href="studentprofile.html" style="color:white">
+        <a href="teacherprofile.html" style="color:white">
             <i class="fa-solid fa-user"></i>
             <span>Aditya</span>
         </a>

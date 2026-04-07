@@ -383,6 +383,89 @@
   }
 
 }
+/* ================= FULL MOBILE FIX ================= */
+@media (max-width: 768px) {
+
+  /* CONTENT PADDING */
+  .content {
+    padding: 12px;
+  }
+
+  /* LIVE HEADER */
+  #live {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  #live button {
+    width: 100%;
+  }
+
+  /* LIVE CARD */
+  .subliveflex {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .live-card button {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  /* NO LIVE BOX */
+  #nolive {
+    text-align: center;
+  }
+
+  #nolive button {
+    width: 100%;
+  }
+
+  /* PAST CLASSES TABLE FIX */
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 10px;
+  }
+
+  .row.header {
+    display: none; /* hide header on mobile */
+  }
+
+  .row div {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .row button {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  /* HERO SECTION (already good, but improve spacing) */
+  .hero {
+    padding: 15px;
+  }
+
+  /* SCHEDULE PAGE */
+  #schedulePage {
+    padding: 15px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  /* MODALS */
+  #editModal,
+  #detailsModal {
+    width: 95%;
+    top: 10%;
+  }
+
+}
 
  </style>
 </head>

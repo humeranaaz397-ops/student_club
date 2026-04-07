@@ -13,10 +13,7 @@
     box-sizing:border-box;
     font-family: Arial, Helvetica, sans-serif;
 
-}
-body{
-    background-color:  #f5f7fb;
-}           
+} 
 /* ================= TOP NAV ================= */
 .top-nav{
     background:#2c2a99;
@@ -254,7 +251,7 @@ a{
 }
 
 .profile-card {
-  background: #fff;
+  background: whitesmoke;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -264,7 +261,7 @@ a{
   width: 80px;
   height: 80px;
   background: goldenrod;
-  color: #fff;
+  color: whitesmoke;
   font-size: 32px;
   border-radius: 50%;
   margin: auto;
@@ -283,7 +280,7 @@ a{
 
 .badge {
   display: inline-block;
-  background: #e0f3ff;
+  background: whitesmoke;
   color: #007bff;
   padding: 5px 10px;
   border-radius: 20px;
@@ -295,14 +292,14 @@ a{
   margin-top: 15px;
   padding: 10px;
   background: #0d6efd;
-  color: #fff;
+  color:whitesmoke;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .content .box {
-  background: #fff;
+  background: whitesmoke;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -316,7 +313,7 @@ a{
 }
 
 .stat-box {
-  background: #fff;
+  background:whitesmoke;
   padding: 15px;
   border-radius: 10px;
   text-align: center;
@@ -436,7 +433,183 @@ a{
 }
 
 
+@media (max-width: 768px) {
+  /* top navbar spacing */
+  .top-nav {
+    padding: 14px 16px;
+  }
 
+  .logo {
+    font-size: 18px;
+    gap: 8px;
+  }
+
+  .nav-actions {
+    gap: 12px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* layout */
+  .layout {
+    grid-template-columns: 0 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .sidebar {
+    min-height: calc(100vh - 58px);
+  }
+
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+    padding: 14px 8px;
+  }
+
+  /* main content top and side spacing */
+  .content {
+    padding: 14px;
+  }
+
+  .hero,
+  .container {
+    margin-top: 14px;
+  }
+
+  /* hero section */
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 16px;
+    gap: 16px;
+    border-radius: 12px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+    line-height: 1.4;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .hero-actions input,
+  .hero-actions button {
+    width: 100%;
+  }
+
+  .hero-image {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* profile + main container */
+  .container {
+    grid-template-columns: 1fr;
+    padding: 0;
+    gap: 16px;
+  }
+
+  .profile-card,
+  .content .box,
+  .stat-box,
+  .course-card {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .profile-card {
+    padding: 18px 14px;
+  }
+
+  /* stats */
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .stat-box {
+    padding: 14px 10px;
+  }
+
+  /* courses */
+  .courses {
+    grid-template-columns: 1fr;
+  }
+
+  /* reviews */
+  .review {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .review span {
+    align-self: flex-start;
+  }
+
+  /* modal spacing */
+  .modal-content {
+    width: calc(100% - 24px);
+    padding: 18px;
+    margin: 12px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+
+  /* footer */
+  .foot {
+    margin-top: 16px;
+    padding: 16px 12px;
+    font-size: 14px;
+  }
+
+  /* prevent horizontal scroll */
+  body,
+  html {
+    overflow-x: hidden;
+  }
+}
+.content {
+  padding: 10px;
+}
+
+.hero {
+  margin-top: 3px;
+}
 </style>
 </head>
 <body>
@@ -648,9 +821,11 @@ a{
 
   </main>
 </div>
+</main>
+</div>
     <footer class="foot">@ 2026 Student Club All rights reserved</footer>
 
-</main>
+
 <script>
 function side(){
     document.getElementById("layout").classList.toggle("show");

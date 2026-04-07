@@ -333,7 +333,188 @@ table td .actions .delete {
             padding: 18px;
             font-size: 16px;
         }
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
 
+.container,
+.card,
+.main-content {
+  width: 100%;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+@media (max-width: 768px) {
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .logo {
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  .nav-actions {
+    gap: 10px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+    padding: 14px 10px;
+  }
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .card {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 15px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions input,
+  .hero-actions button,
+  .upload-box,
+  .upload-btn,
+  #course,
+  #title {
+    width: 100%;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
+  }
+
+  table tr {
+    background: #fff;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 10px 8px;
+    text-align: left;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .foot {
+    font-size: 14px;
+    padding: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  
+
+  .hero {
+    padding: 14px;
+  }
+
+  .hero-text h1 {
+    font-size: 19px;
+  }
+
+  .hero-sub {
+    font-size: 13px;
+  }
+
+  .card {
+    padding: 10px;
+  }
+
+  .upload-box,
+  .upload-btn,
+  #course,
+  #title,
+  .ask-btn {
+    font-size: 14px;
+  }
+
+  td {
+    font-size: 12px;
+    padding: 8px 6px;
+  }
+}
 
 </style>
 </head>
@@ -462,9 +643,12 @@ table td .actions .delete {
 </div>
 
 </div>
+</div>
+</div>
+
 
 <footer class="foot">@ 2026 Student Club All rights reserved</footer>
-</div>
+
 <script>
     
 const fileInput = document.getElementById("fileInput");

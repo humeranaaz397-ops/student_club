@@ -342,7 +342,148 @@ table td .actions .delete {
             padding: 18px;
             font-size: 16px;
         }
+@media (max-width: 768px) {
+  .top-nav {
+    padding: 12px 14px;
+  }
 
+  .nav-actions span {
+    display: none;
+  }
+
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  .main-content {
+    padding: 10px;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .card {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+    padding: 15px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions input,
+  .hero-actions button {
+    width: 100%;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .upload-box,
+  .upload-btn,
+  #course,
+  #title {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+    width: 100%;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody tr,
+  table tr {
+    background: #fff;
+    margin-bottom: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    padding: 10px 8px;
+    text-align: left;
+    position: relative;
+    padding-left: 42%;
+    min-height: 40px;
+    font-size: 13px;
+    word-break: break-word;
+  }
+
+  td:last-child {
+    border-bottom: none;
+  }
+
+  td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    width: 35%;
+    font-weight: bold;
+    color: #2563eb;
+    white-space: nowrap;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .foot {
+    font-size: 14px;
+    padding: 14px;
+  }
+}
 
 </style>
 </head>
@@ -475,9 +616,12 @@ table td .actions .delete {
 </table>
 </div>
 </div>
+</div>
+</div>
+
 <footer class="foot">@ 2026 Student Club All rights reserved</footer>
 
-</div>
+
 
 <script>
 const fileInput = document.getElementById("fileInput");
