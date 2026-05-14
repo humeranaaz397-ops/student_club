@@ -550,6 +550,20 @@ table td .actions .delete {
     </div>
 
 <div class="container">
+  
+<!-- Form -->
+<div class="card">
+<label>Select Course</label>
+<select id="course">
+    <option>Web Development</option>
+    <option>JavaScript ES6</option>
+    <option>Python Basics</option>
+</select>
+
+<label>Material Title</label>
+<input type="text" id="title" placeholder="e.g. Introduction to HTML">
+</div>
+
 
 <!-- Upload Section -->
 <div class="card">
@@ -563,19 +577,6 @@ table td .actions .delete {
 <input type="file" id="fileInput" hidden>
 
 <button class="upload-btn" onclick="uploadMaterial()">Upload Material</button>
-</div>
-
-<!-- Form -->
-<div class="card">
-<label>Select Course</label>
-<select id="course">
-    <option>Web Development</option>
-    <option>JavaScript ES6</option>
-    <option>Python Basics</option>
-</select>
-
-<label>Material Title</label>
-<input type="text" id="title" placeholder="e.g. Introduction to HTML">
 </div>
 
 <!-- Materials -->
