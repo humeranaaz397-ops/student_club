@@ -542,6 +542,255 @@
     display:block;        /* add this */
     margin-left:auto;     /* add this */
 }
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+    .layout.show{
+        grid-template-columns:60px 1fr;
+    }
+
+    .sidebar span{
+        display:none;
+    }
+}
+
+        /* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+
+  /* TOP NAV */
+  .top-nav {
+    padding: 12px 14px;
+  }
+
+  .nav-actions span {
+    display: none;
+  }
+
+  /* LAYOUT */
+  .layout {
+    grid-template-columns: 0px 1fr;
+  }
+
+  .layout.show {
+    grid-template-columns: 60px 1fr;
+  }
+
+  /* SIDEBAR */
+  .sidebar span {
+    display: none;
+  }
+
+  .sidebar li {
+    justify-content: center;
+  }
+
+  /* MAIN CONTENT */
+  .main-content {
+    padding: 12px;
+  }
+
+  /* HERO SECTION */
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 22px;
+  }
+
+  .hero-sub {
+    font-size: 14px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions input {
+    width: 100%;
+  }
+
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+  }
+  #para1, #para2, #para3, #para4 {
+    height: 80px;
+    width: 100%; 
+  }
+}/* ===== FINAL RESPONSIVE FIX ===== */
+
+body {
+  overflow-x: hidden;
+}
+
+.main {
+  width: 100%;
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Stats responsive */
+@media (max-width: 900px) {
+  .stats {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin: 25px 0;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .top-nav {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .logo span {
+    font-size: 16px;
+  }
+
+  .layout,
+  .layout.show {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    padding: 15px;
+  }
+
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 18px;
+  }
+
+  .hero h1 {
+    font-size: 24px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  .hero img {
+    width: 100%;
+    height: 180px;
+  }
+
+  .search-bar {
+    flex-direction: column;
+  }
+
+  .search-bar input,
+  .search-bar button {
+    width: 100%;
+  }
+
+  .create-event-btn {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .event-area {
+    padding: 14px;
+  }
+
+  .event-card {
+    padding: 15px;
+  }
+
+  .event-header {
+    flex-direction: column;
+  }
+
+  .event-img {
+    width: 100%;
+    height: 180px;
+  }
+
+  .event-content h3 {
+    font-size: 20px;
+  }
+
+  .event-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .action-btn {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .full {
+    grid-column: auto;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .nav-actions {
+    gap: 12px;
+  }
+
+  .hero h1 {
+    font-size: 21px;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+
+  .stat-card h4 {
+    font-size: 16px;
+  }
+
+  .stat-card h3 {
+    font-size: 22px;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .apply-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-area {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
 </style>
 </head>
 
@@ -557,7 +806,7 @@
     </div>
 
     <div class="nav-actions">
-       <a href="#" style="color: white;"><i class="fa-regular fa-calendar"></i></a>
+       <a href="./event_teacher.html" style="color: white;"><i class="fa-regular fa-calendar"></i></a>
         <a href="./notification(t).html" style="color:white">
             
             <i class="fa-regular fa-bell"></i>
@@ -576,27 +825,21 @@
 <div class="layout" id="layout">
 
 <!-- ================= SIDEBAR ================= -->
-
 <aside class="sidebar">
-
     <ul>
-
-        <li><a href="#"><i class="fa-solid fa-grip"></i><span>Dashboard</span></a></li>
-
-        <li class="active">
-            <a href="#">
-                <i class="fa-regular fa-calendar"></i>
-                <span>Manage Events</span>
-            </a>
-        </li>
-
-        <li><a href="#"><i class="fa-solid fa-users"></i><span>Students</span></a></li>
-
-        <li><a href="#"><i class="fa-solid fa-comment-dots"></i><span>Chat</span></a></li>
-
-    </ul>
-
+        
+        <li ><a href="teacherdashboard.html"><i class="fa-solid fa-grip"></i><span> Dashboard</span></a></li>
+                <li><a href="uploadpdf.html"><i class="fa-solid fa-upload"></i> <span>Upload Material</span></a></li>
+                <li><a href="uploadvideo.html"><i class="fa-solid fa-video"></i> <span>Upload Video</span></a></li>
+                <li><a href="quiz.html"><i class="fa-solid fa-clipboard-list"></i> <span>Create Quiz</span></a></li>
+                <li ><a href="teacher live classes.html"><i class="fa-solid fa-wifi"></i> <span>Live Classes</span></a></li>
+                <li><a href="answer_q&a.html"><i class="fa-solid fa-circle-question"></i> <span>Answer Q&A</span></a></li>
+                <li><a href="post_notification.html"><i class="fa-regular fa-bell"></i> <span>Post Notification</span></a></li>
+                <li ><a href="chat(T).html"><i class="fa-regular fa-comment"></i><span> Chat</span></a></li>
+                <li><a href="findpeople(T).html"><i class="fa-solid fa-users"></i> <span>Find People</span></a></li>
+         </ul>
 </aside>
+
 
 <!-- ================= MAIN ================= -->
 
